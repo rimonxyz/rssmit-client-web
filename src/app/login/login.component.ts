@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LocalStorageService} from 'angular-2-local-storage';
+import {Auth} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +7,16 @@ import {LocalStorageService} from 'angular-2-local-storage';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  private accessToken: string;
 
-  constructor(private localStorageService: LocalStorageService) { }
+  constructor(private auth: Auth) { }
 
   ngOnInit() {
-    this.localStorageService.add("accessToken","36473hjvrbidkks746kb,cskjd");
-    this.accessToken = this.localStorageService.get("accessToken") as string;    
+    
+  }
+
+
+  login(formValues: any){
+    this.auth.login(formValues.username,formValues.password)
   }
 
 }
