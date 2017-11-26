@@ -3,7 +3,7 @@ import {LocalStorageService} from 'angular-2-local-storage';
 import {UserAuth} from '../model/user_auth.model';
 
 @Injectable()
-export class Storage{
+export class LocalStorage{
 
     public KEYS: any = {
         clientId : "client_id",
@@ -23,7 +23,7 @@ export class Storage{
     }
 
     putAuth(userAuth: UserAuth){
-        this.localStorage.set(this.KEYS.access_token,userAuth.access_token);
-        this.localStorage.set(this.KEYS.refresh_token,userAuth.refresh_token);
+        this.localStorage.set(this.KEYS.accessToken,userAuth.access_token);
+        this.localStorage.set(this.KEYS.refreshToken,userAuth.refresh_token);
     }
 }

@@ -4,7 +4,7 @@ import {IUser} from "../shared/model/user.model";
 import {Observable} from "rxjs/Rx";
 import {Router} from "@angular/router";
 import { IUserBind } from '../shared/model/user-bind.model';
-import {ToastrService} from '../shared/services/toaster.service';
+import {ToastrService} from '../shared/services/toastr.service';
 
 @Component({
   selector: 'app-sign-up',
