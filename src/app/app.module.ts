@@ -22,6 +22,7 @@ import {UserService} from './shared/services/user.service';
 import {Auth} from './shared/services/auth.service';
 import {LocalStorage} from './shared/services/local-storage.service';
 import {ToastrService} from './shared/services/toastr.service';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {ToastrService} from './shared/services/toastr.service';
     CtrlPanelContainerComponent,
     DashboardComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

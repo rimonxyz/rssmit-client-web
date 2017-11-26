@@ -5,11 +5,20 @@ import {ClientDetails} from '../model/client_details.model';
 import {UserAuth} from '../model/user_auth.model';
 import {LocalStorage} from './local-storage.service';
 import {ToastrService} from './toastr.service';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class Auth {
 
-  constructor(private http: Http, private storage: LocalStorage, private toastrService: ToastrService) {
+  constructor(private http: Http, private storage: LocalStorage, private toastrService: ToastrService, private router: Router) {
+  }
+
+  isLoggedIn(): boolean {
+    return this.storage.retrive(this.storage.KEYS.accessToken) != null;
+  }
+
+  logout():void{
+    this.storage.clear();
   }
 
   login(username: string, password: string) {
@@ -19,8 +28,8 @@ export class Auth {
       const userAuth: Observable<UserAuth> = this.http.get(loginUrl).map((response: Response) => <UserAuth>response.json()).catch(this.handleError);
       userAuth.subscribe(userAuth => {
         this.storage.putAuth(userAuth);
-        console.log(userAuth);
-        this.toastrService.success('Success', 'Successfully logged in!<br/>Access Token: '+this.storage.retrive(this.storage.KEYS.accessToken)+'<br/>Refresh Token: '+this.storage.retrive(this.storage.KEYS.refreshToken));
+        this.toastrService.success('Success', 'Successfully logged in!');
+        this.router.navigate(['/dashboard']);
       });
     });
   }

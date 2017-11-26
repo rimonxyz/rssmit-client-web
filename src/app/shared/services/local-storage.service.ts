@@ -26,4 +26,9 @@ export class LocalStorage{
         this.localStorage.set(this.KEYS.accessToken,userAuth.access_token);
         this.localStorage.set(this.KEYS.refreshToken,userAuth.refresh_token);
     }
+
+  clear(): void{
+    this.localStorage.remove(this.KEYS.accessToken);
+    this.localStorage.remove(this.KEYS.refreshToken);
+  }
 }
