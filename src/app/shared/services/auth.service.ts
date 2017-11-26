@@ -7,6 +7,7 @@ import {LocalStorage} from './local-storage.service';
 import {ToastrService} from './toastr.service';
 import {CanActivate, Router} from "@angular/router";
 
+
 @Injectable()
 export class Auth implements CanActivate{
 
@@ -40,6 +41,7 @@ export class Auth implements CanActivate{
         this.storage.putAuth(userAuth);
         this.toastr.success('Success', 'Successfully logged in!');
         this.router.navigate(['/dashboard']);
+        window.location.href = "/dashboard";
       });
     });
   }

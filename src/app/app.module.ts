@@ -23,6 +23,8 @@ import {Auth} from './shared/services/auth.service';
 import {LocalStorage} from './shared/services/local-storage.service';
 import {ToastrService} from './shared/services/toastr.service';
 import { LogoutComponent } from './logout/logout.component';
+import { EventsComponent } from './events/events.component';
+import {EventService} from "./shared/services/event.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { LogoutComponent } from './logout/logout.component';
     DashboardComponent,
     LoginComponent,
     SignUpComponent,
-    LogoutComponent
+    LogoutComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,13 @@ import { LogoutComponent } from './logout/logout.component';
     FormsModule,
     HttpModule
   ],
-  providers: [UserService, Auth, LocalStorage, ToastrService],
+  providers: [
+    UserService,
+    Auth,
+    LocalStorage,
+    ToastrService,
+    EventService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

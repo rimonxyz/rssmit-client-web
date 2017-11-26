@@ -11,9 +11,8 @@ export class LoginComponent implements OnInit {
   constructor(private auth: Auth) { }
 
   ngOnInit() {
-    
-  }
 
+  }
 
   login(formValues: any){
     this.auth.login(formValues.username,formValues.password)

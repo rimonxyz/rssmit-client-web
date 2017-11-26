@@ -1,13 +1,13 @@
 <div class="page-center">
     <div class="page-center-in">
         <div class="container-fluid">
-            <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" class="sign-box" style="margin-left:40%;margin-right:40%;">
+            <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" class="sign-box col-sm-4 sign-in-box">
                 <div class="sign-avatar">
                     <img src="img/avatar-sign.png" alt="">
                 </div>
                 <header class="sign-title">Sign In</header>
                 <div class="form-group">
-                    <input [(ngModel)]="username" name="username" type="text" class="form-control" placeholder="E-Mail or Phone"/>
+                    <input [(ngModel)]="username" name="username" type="text" class="form-control" placeholder="Username or E-Mail"/>
                 </div>
                 <div class="form-group">
                     <input [(ngModel)]="password" name=password type="password" class="form-control" placeholder="Password"/>
@@ -21,7 +21,7 @@
                         <a href="reset-password.html">Reset Password</a>
                     </div>
                 </div><br/>
-                <button type="submit" class="btn btn-rounded">Sign in</button>
+                <button type="submit" class="btn btn-rounded pull-right">Sign in</button>
                 <p class="sign-note">New to our website? <a href="sign-up.html">Sign up</a></p>
                 <!--<button type="button" class="close">
                     <span aria-hidden="true">&times;</span>
