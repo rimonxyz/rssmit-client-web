@@ -13,8 +13,7 @@ export class DateUtil {
     "Nov", "Dec"
   ];
 
-  public static formatReadableDate(date) {
-
+  public static formatReadableDateTime(date) {
     var day = date.getDate();
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
@@ -23,6 +22,13 @@ export class DateUtil {
     var minutes = date.getMinutes();
     var ampm = (armyhours >= 12) ? "PM" : "AM";
     return this.monthNamesShort[monthIndex] + ' ' + day + ', ' + year + ' at ' + hours + ':' + minutes + ' ' + ampm;
+  }
+
+  public static formatReadableDate(date) {
+    var day = date.getDate();
+    var monthIndex = date.getMonth();
+    var year = date.getFullYear();
+    return this.monthNamesShort[monthIndex] + ' ' + day + ', ' + year;
   }
 
 }

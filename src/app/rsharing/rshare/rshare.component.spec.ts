@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateRshareComponent } from './create-rshare.component';
+import { CreateRshareComponent } from './rshare.component';
 
 describe('CreateRshareComponent', () => {
   let component: CreateRshareComponent;

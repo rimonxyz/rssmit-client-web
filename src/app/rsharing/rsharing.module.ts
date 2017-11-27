@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {CreateRShareComponent} from './create-rshare/create-rshare.component';
+import {RShareComponent} from './rshare/rshare.component';
 import {RouterModule} from "@angular/router";
 import {rsharingRoutes} from "./rsharing.route";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(rsharingRoutes)
+    RouterModule.forChild(rsharingRoutes),
+    FormsModule
   ],
-  declarations: [CreateRShareComponent]
+  declarations: [RShareComponent]
 })
 export class RSharingModule { }

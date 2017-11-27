@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
-import {CreateRShareComponent} from "./create-rshare/create-rshare.component";
+import {RShareComponent} from "./rshare/rshare.component";
 
 export const rsharingRoutes: Routes = [
-  {path: 'create', component: CreateRShareComponent}
+  {path: '', component: RShareComponent}
 ]

@@ -24,13 +24,14 @@ export class EventsComponent implements OnInit {
   }
 
   loadNextPage() {
-    this.page += 1;
+    if (this.page < this.eventsPage.totalPages)
+      this.page++;
     this.loadPage(this.page);
   }
 
   loadPreviousPage() {
     if (this.page > 0)
-      this.page -= 1;
+      this.page--;
     this.loadPage(this.page);
   }
 
@@ -47,7 +48,7 @@ export class EventsComponent implements OnInit {
   }
 
   getReadableDate(date: Date): string {
-    return DateUtil.formatReadableDate(date);
+    return DateUtil.formatReadableDateTime(date);
   }
 
 }

@@ -1,0 +1,134 @@
+<header class="section-header">
+  <div class="tbl">
+    <div class="tbl-row">
+      <div class="tbl-cell">
+        <h3>Share Revenue</h3>
+        <ol class="breadcrumb breadcrumb-simple">
+          <li><a href="#">App</a></li>
+          <li><a href="#">Dashboard</a></li>
+          <li class="active">Revenue Sharing</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="box-typical box-typical-padding">
+
+  <h5 class="m-t-lg with-border">Share Revenue</h5>
+
+  <div class="row">
+    <form #shareRevForm="ngForm" (ngSubmit)="shareRevenue(shareRevForm.value)">
+      <div class="col-lg-2">
+        <div class="form-group">
+          <label class="form-label semibold">Total Revenue:</label>
+          <div class="form-control-wrapper form-control-icon-left">
+            <input [(ngModel)]="totalRevenue" name="totalRevenue" type="number" class="form-control" placeholder="Left"/>
+            <i class="fa fa-money"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="form-group">
+          <label class="form-label semibold">Sharing Percentage:</label>
+          <div class="form-control-wrapper form-control-icon-left">
+            <input [(ngModel)]="sharePercentage" name="sharePercentage" type="number" class="form-control" placeholder="Left"/>
+            <i class="fa fa-percent"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="form-group">
+          <label class="form-label semibold">From:</label>
+          <div class="form-control-wrapper form-control-icon-left">
+            <input [(ngModel)]="fromDate" name="fromDate" type="date" class="form-control" placeholder="Left"/>
+            <i class="fa fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="form-group">
+          <label class="form-label semibold">To:</label>
+          <div class="form-control-wrapper form-control-icon-left">
+            <input [(ngModel)]="toDate" name="toDate" type="date" class="form-control" placeholder="Left"/>
+            <i class="fa fa-calendar"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="form-group">
+          <label class="form-label semibold">Share</label>
+          <div class="form-control-wrapper form-control-icon-left">
+            <button type="submit" class="form-control btn btn-primary btn-rounded" placeholder="Left">Share</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div><!--.row-->
+
+</div><!--.box-typical-->
+<section class="box-typical">
+  <header class="box-typical-header">
+    <div class="tbl-row">
+      <div class="tbl-cell tbl-cell-title">
+        <h3><a href="/events">Shared Revenues</a><br/>
+          <!--( Total: <span>{{eventsPage?.totalElements}} events</span> ,-->
+          <!--Showing {{eventsPage?.size}} events/page,-->
+          <!--Page: <span>{{page+1}}</span> )-->
+        </h3>
+      </div>
+    </div>
+  </header>
+  <div class="box-typical-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+        <tr>
+          <th></th>
+          <th>ID</th>
+          <th>Date Range</th>
+          <th>Revenue</th>
+          <th>Sharing Percentage</th>
+          <th>Shared Amount</th>
+        </tr>
+        <tr *ngFor="let rsp of rSharedPage?.content">
+          <td class="table-check">
+            <div class="checkbox checkbox-only">
+              <input type="checkbox" id="tbl-check-1"/>
+              <label for="tbl-check-1"></label>
+            </div>
+          </td>
+          <td><a>{{rsp.id}}</a></td>
+          <td>{{getReadableDate(rsp.fromDate)}} - {{getReadableDate(rsp.toDate)}}</td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">REVENUE</div>
+            {{rsp.revenueAmount}}
+          </td>
+          <td width="150">
+            <div class="progress-with-amount">
+              <progress class="progress progress-success progress-no-margin" [value]="rsp.sharePercentage" max="100">25%</progress>
+              <div class="progress-with-amount-number">{{rsp.sharePercentage}}%</div>
+            </div>
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Shared Amount</div>
+            {{rsp.revenueAmount*rsp.sharePercentage/100}}
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>
+            <button [disabled]="rSharedPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
+            &nbsp;&nbsp;<button [disabled]="rSharedPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next</button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!--.box-typical-body-->
+</section><!--.box-typical-->

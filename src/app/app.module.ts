@@ -25,6 +25,7 @@ import {ToastrService} from './shared/services/toastr.service';
 import { LogoutComponent } from './logout/logout.component';
 import { EventsComponent } from './events/events.component';
 import {EventService} from "./shared/services/event.service";
+import {RsharingService} from "./shared/services/rsharing.service";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {EventService} from "./shared/services/event.service";
     Auth,
     LocalStorage,
     ToastrService,
-    EventService
+    EventService,
+    RsharingService
   ],
   bootstrap: [AppComponent]
 })

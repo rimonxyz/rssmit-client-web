@@ -55,6 +55,14 @@ export class Auth implements CanActivate{
     });
   }
 
+  getAccessToken(): string{
+    return <string>this.storage.retrive(this.storage.KEYS.accessToken);
+  }
+
+  getRefreshToken(): string{
+    return <string>this.storage.retrive(this.storage.KEYS.refreshToken);
+  }
+
 
   getLoginUrl(username: string, password: string, clientId: string, clientSecret: string): string {
     return 'http://172.104.166.238:9090/oauth/token?grant_type=password&client_id=' + clientId + '&client_secret=' + clientSecret + '&username=' + username + '&password=' + password;
