@@ -12,5 +12,6 @@ export const appRoutes: Routes = [
   {path: '', redirectTo: "/dashboard", pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignUpComponent},
-  {path: 'logout', component: LogoutComponent}
+  {path: 'logout', component: LogoutComponent},
+  {path: 'rshare', loadChildren: 'app/rsharing/rsharing.module#RSharingModule'}
 ]
