@@ -39,13 +39,7 @@ export class EventsComponent implements OnInit {
       console.log("Loaded page: " + this.page);
       this.eventsPage = eventsPage
       console.log(this.eventsPage);
-    }, err => {
-      console.log(err);
-      this.toastr.warning('You have been logged out.', 'Please login to continue.');
-      this.auth.logout();
-
-      this.router.navigate(['/login']);
-    });
+    }, err => this.auth.logout());
   }
 
   getWeightPercentage(value: number) {

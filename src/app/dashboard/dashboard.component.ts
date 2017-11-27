@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Auth} from "../shared/services/auth.service";
 import {LocalStorage} from "../shared/services/local-storage.service";
 import {ToastrService} from "../shared/services/toastr.service";
+import {EventStats} from "../shared/model/event_stats.model";
+import {EventService} from "../shared/services/event.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,20 +16,30 @@ export class DashboardComponent implements OnInit {
   clientIdVisible: boolean;
   clientSecretVisible: boolean;
 
-  constructor(private storage: LocalStorage,private toastr: ToastrService,private auth: Auth) {
+  eventStats: EventStats;
+  period: string;
+
+  constructor(private storage: LocalStorage, private eventService: EventService, private toastr: ToastrService, private auth: Auth) {
   }
 
   ngOnInit() {
-    this.clientId = this.storage.retrive(this.storage.KEYS.clientId)+'';
-    this.clientSecret = this.storage.retrive(this.storage.KEYS.clientSecret)+'';
+    this.clientId = this.storage.retrive(this.storage.KEYS.clientId) + '';
+    this.clientSecret = this.storage.retrive(this.storage.KEYS.clientSecret) + '';
 
+    // get event statistics
+    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.logout());
   }
 
-  toggleClientIdVisibility(): void{
+  onEventStatsPeriodChange(period: string): void{
+    this.period = period;
+    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.logout());
+  }
+
+  toggleClientIdVisibility(): void {
     this.clientIdVisible = !this.clientIdVisible;
   }
 
-  toggleClientSecretVisibility(): void{
+  toggleClientSecretVisibility(): void {
     this.clientSecretVisible = !this.clientSecretVisible;
   }
 
@@ -47,7 +59,7 @@ export class DashboardComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(selBox);
 
-    this.toastr.success('Success!','Item Copied!');
+    this.toastr.success('Success!', 'Item Copied!');
   }
 
 

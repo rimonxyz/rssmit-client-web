@@ -30,6 +30,8 @@ export class Auth implements CanActivate{
 
   logout():void{
     this.storage.clear();
+    this.toastr.warning('You\'ve been logged out!','Please login to continue.');
+    this.router.navigate(['/login']);
   }
 
   login(username: string, password: string) {

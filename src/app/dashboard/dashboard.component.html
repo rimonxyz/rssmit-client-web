@@ -8,18 +8,25 @@
         </div>
         <table class="tbl-data">
           <tr>
-            <td class="price color-purple">120$</td>
-            <td>Orders</td>
+            <td class="price color-purple">{{eventStats.totalEvents}}</td>
+            <td>Total Events</td>
           </tr>
           <tr>
-            <td class="price color-yellow">15$</td>
-            <td>Investments</td>
+            <td class="price color-yellow">{{eventStats.actualWeightSum}}</td>
+            <td>Total Interaction<br/>Points</td>
           </tr>
           <tr>
-            <td class="price color-lime">55$</td>
-            <td>Others</td>
+            <td class="price color-lime">{{eventStats.weightSum}}</td>
+            <td>Total Interaction<br/>Points earned by <br/>Users</td>
           </tr>
         </table>
+        <select (change)="onEventStatsPeriodChange($event.target.value)" class="select2">
+          <option value="this_month">This Month</option>
+          <option value="last_month">Last Month</option>
+          <option value="this_year">This Year</option>
+          <option value="last_year">Last Year</option>
+          <option value="all_time">All Time</option>
+        </select>
       </div>
       <div class="chart-container">
         <div class="chart-container-in">
@@ -121,7 +128,7 @@
     <section class="widget widget-simple-sm">
       <div class="widget-simple-sm-statistic">
         <div class="number">
-          <button *ngIf="!clientIdVisible" (click)="toggleClientIdVisibility()" class="btn btn-primary">Show</button>
+          <button *ngIf="!clientIdVisible" (click)="toggleClientIdVisibility()" class="btn btn-primary btn-block">Show</button>
           <span *ngIf="clientIdVisible">
             {{clientId}}
           </span>
@@ -138,7 +145,7 @@
     <section class="widget widget-simple-sm">
       <div class="widget-simple-sm-statistic">
         <div class="number">
-          <button *ngIf="!clientSecretVisible" (click)="toggleClientSecretVisibility()" class="btn btn-primary">Show
+          <button *ngIf="!clientSecretVisible" (click)="toggleClientSecretVisibility()" class="btn btn-primary btn-block">Show
           </button>
           <span *ngIf="clientSecretVisible">
             {{clientSecret}}
