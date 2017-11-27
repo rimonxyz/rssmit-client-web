@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {EventService} from "../shared/services/event.service";
 import {EventPage} from "../shared/model/event-page.model";
 import {DateUtil} from "../shared/utils/date.util";
+import {ToastrService} from "../shared/services/toastr.service";
+import {Router} from "@angular/router";
+import {Auth} from "../shared/services/auth.service";
 
 @Component({
   selector: 'app-events',
@@ -10,20 +13,46 @@ import {DateUtil} from "../shared/utils/date.util";
 })
 export class EventsComponent implements OnInit {
   eventsPage: EventPage;
+  page: number;
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService, private auth: Auth, private toastr: ToastrService, private router: Router) {
   }
 
   ngOnInit() {
-    this.eventService.getEvents().subscribe(eventsPage => this.eventsPage = eventsPage);
-    console.log(this.eventsPage);
+    this.page = 0;
+    this.loadPage(this.page);
+  }
+
+  loadNextPage() {
+    this.page += 1;
+    this.loadPage(this.page);
+  }
+
+  loadPreviousPage() {
+    if (this.page > 0)
+      this.page -= 1;
+    this.loadPage(this.page);
+  }
+
+  loadPage(page: number) {
+    this.eventService.getEvents(page).subscribe(eventsPage => {
+      console.log("Loaded page: " + this.page);
+      this.eventsPage = eventsPage
+      console.log(this.eventsPage);
+    }, err => {
+      console.log(err);
+      this.toastr.warning('You have been logged out.', 'Please login to continue.');
+      this.auth.logout();
+
+      this.router.navigate(['/login']);
+    });
   }
 
   getWeightPercentage(value: number) {
     return value * 100 / 5;
   }
 
-  getReadableDate(date: Date): string{
+  getReadableDate(date: Date): string {
     return DateUtil.formatReadableDate(date);
   }
 

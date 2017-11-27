@@ -30,5 +30,7 @@ export class LocalStorage{
   clear(): void{
     this.localStorage.remove(this.KEYS.accessToken);
     this.localStorage.remove(this.KEYS.refreshToken);
+    this.localStorage.remove(this.KEYS.clientId);
+    this.localStorage.remove(this.KEYS.clientSecret)
   }
 }

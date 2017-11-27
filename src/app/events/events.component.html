@@ -2,7 +2,11 @@
   <header class="box-typical-header">
     <div class="tbl-row">
       <div class="tbl-cell tbl-cell-title">
-        <h3>All User Events</h3>
+        <h3><a href="/events"> All User Events </a><br/>
+          ( Total: <span>{{eventsPage?.totalElements}} events</span> ,
+          Showing {{eventsPage?.size}} events/page,
+          Page: <span>{{page+1}}</span> )
+        </h3>
       </div>
     </div>
   </header>
@@ -20,7 +24,7 @@
           <th></th>
           <th></th>
         </tr>
-        <tr *ngFor="let e of eventsPage.content">
+        <tr *ngFor="let e of eventsPage?.content">
           <td class="table-check">
             <div class="checkbox checkbox-only">
               <input type="checkbox" id="tbl-check-1"/>
@@ -49,7 +53,19 @@
             {{getReadableDate(e.lastUpdated)}}
           </td>
         </tr>
-
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>
+            <button [disabled]="eventsPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
+            &nbsp;&nbsp;<button [disabled]="eventsPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next</button>
+          </th>
+        </tr>
         </tbody>
       </table>
     </div>

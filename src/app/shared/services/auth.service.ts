@@ -34,7 +34,10 @@ export class Auth implements CanActivate{
 
   login(username: string, password: string) {
     return this.getClientCredentials(username, password).subscribe(clientDetails => {
-      console.log(clientDetails);
+      // save client id and secret to local storage
+      this.storage.put(this.storage.KEYS.clientId,clientDetails.clientId);
+      this.storage.put(this.storage.KEYS.clientSecret,clientDetails.clientSecret);
+
       const loginUrl: string = this.getLoginUrl(username, password, clientDetails.clientId, clientDetails.clientSecret);
       const userAuth: Observable<UserAuth> = this.http.get(loginUrl).map((response: Response) => <UserAuth>response.json()).catch(this.handleError);
       userAuth.subscribe(userAuth => {
@@ -43,6 +46,10 @@ export class Auth implements CanActivate{
         this.router.navigate(['/dashboard']);
         window.location.href = "/dashboard";
       });
+    },e=>{
+      this.logout();
+      this.toastr.error('Failed!','Invalid username/email or password.');
+      this.router.navigate(['/login']);
     });
   }
 

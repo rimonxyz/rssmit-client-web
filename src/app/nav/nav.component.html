@@ -2,31 +2,37 @@
 
 <nav class="side-menu" *ngIf="isLoggedIn()">
     <ul class="side-menu-list">
-        <li class="grey with-sub">
-            <span>
-                <i class="font-icon font-icon-dashboard"></i>
-                <span class="lbl">Dashboard</span>
-            </span>
-            <ul>
-                <li><a href="index.html"><span class="lbl">Default</span><span class="label label-custom label-pill label-danger">new</span></a></li>
-                <li><a href="dashboard-top-menu.html"><span class="lbl">Top menu</span></a></li>
-                <li><a href="side-menu-compact-full.html"><span class="lbl">Compact menu</span></a></li>
-                <li><a href="dashboard-addl-menu.html"><span class="lbl">Submenu</span></a></li>
-                <li><a href="side-menu-avatar.html"><span class="lbl">Menu with avatar</span></a></li>
-                <li><a href="side-menu-avatar.html"><span class="lbl">Compact menu with avatar</span></a></li>
-                <li><a href="dark-menu.html"><span class="lbl">Dark menu</span></a></li>
-                <li><a href="dark-menu-blue.html"><span class="lbl">Blue dark menu</span></a></li>
-                <li><a href="dark-menu-green.html"><span class="lbl">Green dark menu</span></a></li>
-                <li><a href="dark-menu-green-compact.html"><span class="lbl">Green compact dark menu</span></a></li>
-                <li><a href="dark-menu-ultramarine.html"><span class="lbl">Ultramarine dark menu</span></a></li>
-                <li><a href="asphalt-menu.html"><span class="lbl">Asphalt top menu</span></a></li>
-                <li><a href="side-menu-big-icon.html"><span class="lbl">Big menu</span></a></li>
-            </ul>
+        <!--<li class="grey with-sub">-->
+            <!--<span>-->
+                <!--<i class="font-icon font-icon-dashboard"></i>-->
+                <!--<span class="lbl">Dashboard</span>-->
+            <!--</span>-->
+            <!--<ul>-->
+                <!--<li><a href="index.html"><span class="lbl">Default</span><span class="label label-custom label-pill label-danger">new</span></a></li>-->
+                <!--<li><a href="dashboard-top-menu.html"><span class="lbl">Top menu</span></a></li>-->
+                <!--<li><a href="side-menu-compact-full.html"><span class="lbl">Compact menu</span></a></li>-->
+                <!--<li><a href="dashboard-addl-menu.html"><span class="lbl">Submenu</span></a></li>-->
+                <!--<li><a href="side-menu-avatar.html"><span class="lbl">Menu with avatar</span></a></li>-->
+                <!--<li><a href="side-menu-avatar.html"><span class="lbl">Compact menu with avatar</span></a></li>-->
+                <!--<li><a href="dark-menu.html"><span class="lbl">Dark menu</span></a></li>-->
+                <!--<li><a href="dark-menu-blue.html"><span class="lbl">Blue dark menu</span></a></li>-->
+                <!--<li><a href="dark-menu-green.html"><span class="lbl">Green dark menu</span></a></li>-->
+                <!--<li><a href="dark-menu-green-compact.html"><span class="lbl">Green compact dark menu</span></a></li>-->
+                <!--<li><a href="dark-menu-ultramarine.html"><span class="lbl">Ultramarine dark menu</span></a></li>-->
+                <!--<li><a href="asphalt-menu.html"><span class="lbl">Asphalt top menu</span></a></li>-->
+                <!--<li><a href="side-menu-big-icon.html"><span class="lbl">Big menu</span></a></li>-->
+            <!--</ul>-->
+        <!--</li>-->
+        <li class="red">
+          <a [routerLink]="['/dashboard']">
+            <i class="font-icon font-icon-dashboard"></i>
+            <span class="lbl">Dashboard</span>
+          </a>
         </li>
         <li class="purple with-sub">
               <span>
                   <i class="font-icon font-icon-dashboard"></i>
-                  <span [routerLink]="['/events']" class="lbl">Events</span>
+                  <span class="lbl">Events</span>
               </span>
           <ul>
             <li><a [routerLink]="['/events']"><span class="lbl">All Events</span></a></li>
