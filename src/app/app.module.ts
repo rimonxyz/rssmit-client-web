@@ -22,8 +22,8 @@ import {UserService} from './shared/services/user.service';
 import {Auth} from './shared/services/auth.service';
 import {LocalStorage} from './shared/services/local-storage.service';
 import {ToastrService} from './shared/services/toastr.service';
-import { LogoutComponent } from './logout/logout.component';
-import { EventsComponent } from './events/events.component';
+import {LogoutComponent} from './logout/logout.component';
+import {EventsComponent} from './events/events.component';
 import {EventService} from "./shared/services/event.service";
 import {RsharingService} from "./shared/services/rsharing.service";
 
