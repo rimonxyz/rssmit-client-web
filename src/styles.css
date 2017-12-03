@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@media only screen and (min-width: 500px) {
+  .sign-in-box{
+    margin-left: 300px;
+    margin-top: 200px;
+  }
+  .sign-in-box button{
+    margin-top: 10px;
+  }
+  .sign-in-box .sign-note{
+    margin-top: 30px;
+  }
+}
