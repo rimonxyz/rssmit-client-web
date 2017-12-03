@@ -49,6 +49,9 @@
             <div class="font-11 color-blue-grey-lighter uppercase">Joined</div>
             {{getReadableDate(u.created)}}
           </td>
+          <td>
+            <button [routerLink]="['/users/earnings',u.id]" class="btn btn-primary">Earnings</button>
+          </td>
         </tr>
         <tr>
           <th></th>

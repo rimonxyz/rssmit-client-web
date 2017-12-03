@@ -14,6 +14,8 @@ export class RShareComponent implements OnInit {
 
   rSharedPage: RSharedPage;
   page: number;
+  month: string;
+  year: string;
 
   constructor(private rsharingService: RsharingService, private toastr: ToastrService) {
   }
@@ -27,8 +29,8 @@ export class RShareComponent implements OnInit {
     let rShared: RShared = new RShared();
     rShared.revenueAmount = formValues.totalRevenue;
     rShared.sharePercentage = formValues.sharePercentage;
-    rShared.fromDate = formValues.fromDate;
-    rShared.toDate = formValues.toDate;
+    rShared.month = formValues.month;
+    rShared.year = formValues.year;
     this.rsharingService.createRShared(rShared).subscribe((rs: RShared) => {
       this.toastr.success('Success!', 'Successfully created a sharing entity!');
       this.fetchRSharedPage();
@@ -56,8 +58,16 @@ export class RShareComponent implements OnInit {
     this.fetchRSharedPage();
   }
 
-  getReadableDate(date: string): string{
+  getReadableDate(date: string): string {
     let d = new Date(date);
     return DateUtil.formatReadableDate(d);
+  }
+
+  onMonthInputChange(month: string) {
+    this.month = this.month;
+  }
+
+  onYearInputChange(year: string) {
+    this.year = year;
   }
 }

@@ -23,7 +23,8 @@
         <div class="form-group">
           <label class="form-label semibold">Total Revenue:</label>
           <div class="form-control-wrapper form-control-icon-left">
-            <input [(ngModel)]="totalRevenue" name="totalRevenue" type="number" class="form-control" placeholder="Left"/>
+            <input [(ngModel)]="totalRevenue" name="totalRevenue" type="number" class="form-control"
+                   placeholder="Left"/>
             <i class="fa fa-money"></i>
           </div>
         </div>
@@ -32,7 +33,8 @@
         <div class="form-group">
           <label class="form-label semibold">Sharing Percentage:</label>
           <div class="form-control-wrapper form-control-icon-left">
-            <input [(ngModel)]="sharePercentage" name="sharePercentage" type="number" class="form-control" placeholder="Left"/>
+            <input [(ngModel)]="sharePercentage" name="sharePercentage" type="number" class="form-control"
+                   placeholder="Left"/>
             <i class="fa fa-percent"></i>
           </div>
         </div>
@@ -42,7 +44,21 @@
         <div class="form-group">
           <label class="form-label semibold">From:</label>
           <div class="form-control-wrapper form-control-icon-left">
-            <input [(ngModel)]="fromDate" name="fromDate" type="date" class="form-control" placeholder="Left"/>
+            <select [(ngModel)]="month" name="month" class="form-control">
+              <option value="january">January</option>
+              <option value="february">February</option>
+              <option value="march">March</option>
+              <option value="april">April</option>
+              <option value="may">May</option>
+              <option value="jun">June</option>
+              <option value="july">July</option>
+              <option value="august">August</option>
+              <option value="september">September</option>
+              <option value="october">October</option>
+              <option value="november">November</option>
+              <option value="december">December</option>
+            </select>
+            <!--<input [(ngModel)]="fromDate" name="fromDate" type="date" class="form-control" placeholder="Left"/>-->
             <i class="fa fa-calendar"></i>
           </div>
         </div>
@@ -51,7 +67,18 @@
         <div class="form-group">
           <label class="form-label semibold">To:</label>
           <div class="form-control-wrapper form-control-icon-left">
-            <input [(ngModel)]="toDate" name="toDate" type="date" class="form-control" placeholder="Left"/>
+            <select [(ngModel)]="year" name="year" class="form-control">
+              <option value="2017">2017</option>
+              <option value="2017">2018</option>
+              <option value="2017">2019</option>
+              <option value="2017">2020</option>
+              <option value="2017">2021</option>
+              <option value="2017">2022</option>
+              <option value="2017">2023</option>
+              <option value="2017">2024</option>
+              <option value="2017">2025</option>
+            </select>
+            <!--<input [(ngModel)]="toDate" name="toDate" type="date" class="form-control" placeholder="Left"/>-->
             <i class="fa fa-calendar"></i>
           </div>
         </div>
@@ -107,7 +134,9 @@
           </td>
           <td width="150">
             <div class="progress-with-amount">
-              <progress class="progress progress-success progress-no-margin" [value]="rsp.sharePercentage" max="100">25%</progress>
+              <progress class="progress progress-success progress-no-margin" [value]="rsp.sharePercentage" max="100">
+                25%
+              </progress>
               <div class="progress-with-amount-number">{{rsp.sharePercentage}}%</div>
             </div>
           </td>
@@ -123,8 +152,10 @@
           <th></th>
           <th></th>
           <th>
-            <button [disabled]="rSharedPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
-            &nbsp;&nbsp;<button [disabled]="rSharedPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next</button>
+            <button [disabled]="rSharedPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous
+            </button>
+            &nbsp;&nbsp;<button [disabled]="rSharedPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next
+          </button>
           </th>
         </tr>
         </tbody>

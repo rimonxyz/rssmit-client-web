@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../shared/services/user.service";
 import {UserPage} from "../../shared/model/user_page.model";
 import {DateUtil} from "../../shared/utils/date.util";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,7 @@ export class UsersComponent implements OnInit {
   userPage: UserPage;
   page: number;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService,private router: Router) {
   }
 
   ngOnInit() {
@@ -40,4 +41,7 @@ export class UsersComponent implements OnInit {
     this.loadUsers(this.page);
   }
 
+  loadEarnings(userId: Number) {
+    this.router.navigate([''])
+  }
 }

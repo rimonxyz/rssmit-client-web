@@ -1,12 +1,12 @@
 export class DateUtil {
-  static monthNames: string[] = [
+  public static monthNames: string[] = [
     "January", "February", "March",
     "April", "May", "June", "July",
     "August", "September", "October",
     "November", "December"
   ];
 
-  static monthNamesShort: string[] = [
+  public static monthNamesShort: string[] = [
     "Jan", "Feb", "Mar",
     "Apr", "May", "Jun", "Jul",
     "Aug", "Sep", "Oct",

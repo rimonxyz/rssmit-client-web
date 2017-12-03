@@ -4,4 +4,6 @@ export class RShared{
   sharePercentage: number;
   fromDate: string;
   toDate: string;
+  month: string;
+  year: number;
 }
