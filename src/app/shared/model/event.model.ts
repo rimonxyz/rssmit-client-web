@@ -2,7 +2,7 @@ export class Event{
   id: number;
   created: Date;
   lastUpdated: Date;
-  eventId: number;
+  eventId: string;
   name: string;
   code: string;
   type: string;
