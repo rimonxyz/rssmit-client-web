@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Rx';
 import {Http, Response} from '@angular/http';
 import {UserPage} from "../model/user_page.model";
 import {Auth} from "./auth.service";
+import {ApiEndpoints} from "./api.endpoints";
 
 @Injectable()
 export class UserService {
@@ -30,11 +31,11 @@ export class UserService {
   }
 
   private getDevRegistrationUrl(user: IUserBind) {
-    return "http://172.104.166.238:9090/dev/register?name=" + user.name + "&username=" + user.username + "&email=" + user.email + "&password=" + user.password;
+    return ApiEndpoints.BASE_URL + "/dev/register?name=" + user.name + "&username=" + user.username + "&email=" + user.email + "&password=" + user.password;
   }
 
   private getUserPageUrl(page: number) {
-    return "http://172.104.166.238:9090/api/v1/users?page=" + page + "&access_token=" + this.auth.getAccessToken();
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/users?page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 
 

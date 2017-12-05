@@ -6,6 +6,7 @@ import {UserAuth} from '../model/user_auth.model';
 import {LocalStorage} from './local-storage.service';
 import {ToastrService} from './toastr.service';
 import {CanActivate, Router} from "@angular/router";
+import {ApiEndpoints} from "./api.endpoints";
 
 
 @Injectable()
@@ -65,7 +66,7 @@ export class Auth implements CanActivate{
 
 
   getLoginUrl(username: string, password: string, clientId: string, clientSecret: string): string {
-    return 'http://172.104.166.238:9090/oauth/token?grant_type=password&client_id=' + clientId + '&client_secret=' + clientSecret + '&username=' + username + '&password=' + password;
+    return ApiEndpoints.BASE_URL + '/oauth/token?grant_type=password&client_id=' + clientId + '&client_secret=' + clientSecret + '&username=' + username + '&password=' + password;
   }
 
 
@@ -74,7 +75,7 @@ export class Auth implements CanActivate{
   }
 
   private getClientCredentialsUrl(username: string, password: string) {
-    return 'http://172.104.166.238:9090/dev/client/credentials?username=' + username + '&password=' + password;
+    return ApiEndpoints.BASE_URL + '/dev/client/credentials?username=' + username + '&password=' + password;
   }
 
 

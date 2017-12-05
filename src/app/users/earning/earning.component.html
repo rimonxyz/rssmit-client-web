@@ -65,9 +65,9 @@
   <div class="col-sm-6">
     <article class="statistic-box purple">
       <div>
-        <div class="number">{{userRev.currentMonthIncome}}</div>
+        <div class="number">৳{{userRev.currentBalance}}</div>
         <div class="caption">
-          <div>Current Month Income</div>
+          <div>Current Balance</div>
         </div>
         <div class="percent">
           <div class="arrow down"></div>
@@ -93,7 +93,7 @@
   <div class="col-sm-6">
     <article class="statistic-box green">
       <div>
-        <div class="number">{{userRev.previousMonthIncome}}</div>
+        <div class="number">৳{{userRev.previousMonthIncome}}</div>
         <div class="caption">
           <div>Previous Month Income</div>
         </div>
@@ -110,9 +110,9 @@
   <header class="box-typical-header">
     <div class="tbl-row">
       <div class="tbl-cell tbl-cell-title">
-        <h3><a href="/events"> All Users</a><br/>
-          ( Total: <span>{{userPage?.totalElements}} users</span> ,
-          Showing {{userPage?.size}} users/page,
+        <h3><a href="/earnings"> All Transactions</a><br/>
+          ( Total: <span>{{trnxPage?.totalElements}} transactions</span> ,
+          Showing {{trnxPage?.size}} users/page,
           Page: <span>{{page+1}}</span> )
         </h3>
       </div>
@@ -124,41 +124,41 @@
         <tbody>
         <tr>
           <th></th>
-          <th>ID</th>
-          <th>Name</th>
+          <th>TrnxID</th>
+          <th>Payment Date</th>
           <th></th>
           <th></th>
           <th></th>
           <th></th>
-          <th></th>
+          <th>Reference</th>
         </tr>
-        <tr *ngFor="let u of userPage?.content">
+        <tr *ngFor="let t of trnxPage?.content">
           <td class="table-check">
             <div class="checkbox checkbox-only">
               <input type="checkbox" id="tbl-check-1"/>
               <label for="tbl-check-1"></label>
             </div>
           </td>
-          <td>{{u.id}}</td>
-          <td>{{u.name}}</td>
+          <td>{{t.id}}</td>
+          <td>{{getReadableDate(t.fromDate)}} - {{getReadableDate(t.toDate)}}</td>
           <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Username</div>
-            {{u.username}}
+            <div class="font-11 color-blue-grey-lighter uppercase">Debit</div>
+            {{t.debit}}
           </td>
           <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Email</div>
-            {{u.email}}
+            <div class="font-11 color-blue-grey-lighter uppercase">Credit</div>
+            {{t.credit}}
           </td>
           <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Address</div>
-            NULL
+            <div class="font-11 color-blue-grey-lighter uppercase">Current Balance</div>
+            {{t.balance}}
           </td>
           <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Joined</div>
-            {{getReadableDate(u.created)}}
+            <div class="font-11 color-blue-grey-lighter uppercase">Payment confirmed</div>
+            {{getReadableDateTime(t.created)}}
           </td>
           <td>
-            <button [routerLink]="['/users/earnings',u.id]" class="btn btn-primary">Earnings</button>
+            {{t.reference}}
           </td>
         </tr>
         <tr>
@@ -169,9 +169,10 @@
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
           <th>
-            <button [disabled]="userPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
-            &nbsp;&nbsp;<button [disabled]="userPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next
+            <button [disabled]="trnxPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
+            &nbsp;&nbsp;<button [disabled]="trnxPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next
           </button>
           </th>
         </tr>

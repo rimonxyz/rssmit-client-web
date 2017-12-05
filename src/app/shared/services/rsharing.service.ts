@@ -5,6 +5,7 @@ import {Observable} from "rxjs/Observable";
 import {Auth} from "./auth.service";
 import {RSharedPage} from "../model/rshared_page.model";
 import {UserRev} from "../model/user-rev.model";
+import {ApiEndpoints} from "./api.endpoints";
 
 @Injectable()
 export class RsharingService {
@@ -30,15 +31,15 @@ export class RsharingService {
   }
 
   getSingleUserRevUrl(userId, month, year): string {
-    return "http://172.104.166.238:9090/api/v1/users/" + userId + "/rev?month=" + month + "&year=" + year + "&access_token=" + this.auth.getAccessToken();
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/users/" + userId + "/rev?month=" + month + "&year=" + year + "&access_token=" + this.auth.getAccessToken();
   }
 
   getCreateRSharedUrl(rShared: RShared): string {
-    return 'http://172.104.166.238:9090/api/v1/rshared?revenueAmount=' + rShared.revenueAmount + '&sharePercentage=' + rShared.sharePercentage + '&month=' + rShared.month + '&year=' + rShared.year + '&access_token=' + this.auth.getAccessToken();
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/rshared?revenueAmount=' + rShared.revenueAmount + '&sharePercentage=' + rShared.sharePercentage + '&month=' + rShared.month + '&year=' + rShared.year + '&access_token=' + this.auth.getAccessToken();
   }
 
   getAllRSharedUrl(page: number) {
-    return 'http://172.104.166.238:9090/api/v1/rshared?page=' + page + '&access_token=' + this.auth.getAccessToken();
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/rshared?page=' + page + '&access_token=' + this.auth.getAccessToken();
   }
 
   handleError(err): Observable<Response> {

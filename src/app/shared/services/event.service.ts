@@ -5,6 +5,7 @@ import {EventPage} from "../model/event-page.model";
 import {LocalStorage} from "./local-storage.service";
 import {Event} from "../model/event.model";
 import {EventStats} from "../model/event_stats.model";
+import {ApiEndpoints} from "./api.endpoints";
 
 @Injectable()
 export class EventService {
@@ -31,11 +32,11 @@ export class EventService {
   }
 
   getEventPageUrl(page: number): string {
-    return 'http://172.104.166.238:9090/api/v1/events?page=' + page + '&access_token=' + this.storage.retrive(this.storage.KEYS.accessToken);
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + 'events?page=' + page + '&access_token=' + this.storage.retrive(this.storage.KEYS.accessToken);
   }
 
   getEventStatsUrl(period: string) {
-    return 'http://172.104.166.238:9090/api/v1/events/stats?period=' + period + '&access_token=' + this.storage.retrive(this.storage.KEYS.accessToken);
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/events/stats?period=' + period + '&access_token=' + this.storage.retrive(this.storage.KEYS.accessToken);
   }
 
   private handleError(error: Response) {

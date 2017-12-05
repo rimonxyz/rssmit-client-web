@@ -13,6 +13,6 @@ export const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignUpComponent},
   {path: 'logout', component: LogoutComponent},
-  {path: 'rshare', loadChildren: 'app/rsharing/rsharing.module#RSharingModule'},
-  {path: 'users', loadChildren: 'app/users/users.module#UsersModule'}
+  {path: 'rshare', loadChildren: 'app/rsharing/rsharing.module#RSharingModule', canActivate: [Auth]},
+  {path: 'users', loadChildren: 'app/users/users.module#UsersModule', canActivate: [Auth]}
 ]
