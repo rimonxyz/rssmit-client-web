@@ -130,7 +130,7 @@
           <td>{{getReadableDate(rsp.fromDate)}} - {{getReadableDate(rsp.toDate)}}</td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">REVENUE</div>
-            {{rsp.revenueAmount}}
+            ৳{{rsp.revenueAmount}}
           </td>
           <td width="150">
             <div class="progress-with-amount">
@@ -142,7 +142,7 @@
           </td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Shared Amount</div>
-            {{rsp.revenueAmount*rsp.sharePercentage/100}}
+            ৳{{rsp.revenueAmount*rsp.sharePercentage/100}}
           </td>
           <td>
             <button [routerLink]="[rsp.id,'eUsers']" class="btn btn-primary">Eligible Users</button>
