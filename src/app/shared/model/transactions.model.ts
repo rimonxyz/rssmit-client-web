@@ -9,4 +9,5 @@ export class Transaction {
   explanation: string;
   fromDate: Date;
   toDate: Date;
+  payment: boolean;
 }

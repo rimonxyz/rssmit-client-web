@@ -16,7 +16,12 @@ export class UserService {
 
   getUsers(page: number): Observable<UserPage> {
     return this.http.get(this.getUserPageUrl(page))
-      .map((response: Response) => <UserPage>response.json()).catch(this.handleError)
+      .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
+  }
+
+  getEligibleUsersForSharing(rshareId: number, page: number) {
+    return this.http.get(this.getEligibleUsersForSharingUrl(rshareId, page))
+      .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
   }
 
   register(user: IUserBind): Observable<IUser> {
@@ -38,6 +43,9 @@ export class UserService {
     return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/users?page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 
+  private getEligibleUsersForSharingUrl(rshareId: number, page: number) {
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/rshared/" + rshareId + "/eligibleUsers?page=" + page + "&access_token=" + this.auth.getAccessToken();
+  }
 
   private handleError(error: Response) {
     return Observable.throw(error.statusText);

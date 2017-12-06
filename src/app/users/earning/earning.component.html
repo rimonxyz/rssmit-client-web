@@ -131,6 +131,7 @@
           <th></th>
           <th></th>
           <th>Reference</th>
+          <th></th>
         </tr>
         <tr *ngFor="let t of trnxPage?.content">
           <td class="table-check">
@@ -143,15 +144,15 @@
           <td>{{getReadableDate(t.fromDate)}} - {{getReadableDate(t.toDate)}}</td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Debit</div>
-            {{t.debit}}
+            ৳{{t.debit}}
           </td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Credit</div>
-            {{t.credit}}
+            ৳{{t.credit}}
           </td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Current Balance</div>
-            {{t.balance}}
+            ৳{{t.balance}}
           </td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Payment confirmed</div>
@@ -159,6 +160,10 @@
           </td>
           <td>
             {{t.reference}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Type</div>
+            <span [ngClass]="t.payment? 'text-primary':'text-success'">{{t.payment? 'Payment':'Credited'}}</span>
           </td>
         </tr>
         <tr>

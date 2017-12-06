@@ -4,6 +4,7 @@ import {RShareComponent} from './rshare/rshare.component';
 import {RouterModule} from "@angular/router";
 import {rsharingRoutes} from "./rsharing.route";
 import {FormsModule} from "@angular/forms";
+import { EligibleUsersComponent } from './eligible-users/eligible-users.component';
 
 @NgModule({
   imports: [
@@ -11,6 +12,6 @@ import {FormsModule} from "@angular/forms";
     RouterModule.forChild(rsharingRoutes),
     FormsModule
   ],
-  declarations: [RShareComponent]
+  declarations: [RShareComponent, EligibleUsersComponent]
 })
 export class RSharingModule { }

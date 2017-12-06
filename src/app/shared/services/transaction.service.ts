@@ -27,7 +27,7 @@ export class TransactionService {
   }
 
   getTransactionsUrl(userId: number): string {
-    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/payments/" + userId + "?access_token=" + this.auth.getAccessToken();
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/transactions/" + userId + "?access_token=" + this.auth.getAccessToken();
   }
 
   handleError(err): Observable<Response> {

@@ -144,8 +144,12 @@
             <div class="font-11 color-blue-grey-lighter uppercase">Shared Amount</div>
             {{rsp.revenueAmount*rsp.sharePercentage/100}}
           </td>
+          <td>
+            <button [routerLink]="[rsp.id,'eUsers']" class="btn btn-primary">Eligible Users</button>
+          </td>
         </tr>
         <tr>
+          <th></th>
           <th></th>
           <th></th>
           <th></th>
