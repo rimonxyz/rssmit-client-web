@@ -42,8 +42,8 @@
             {{u.email}}
           </td>
           <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Address</div>
-            NULL
+            <div class="font-11 color-blue-grey-lighter uppercase">EARNING</div>
+            <span class="text text-success">৳{{u.currentBalance}}</span>
           </td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Joined</div>
@@ -52,8 +52,16 @@
           <td>
             <button [routerLink]="['/users/earnings',u.id]" class="btn btn-primary">Earnings</button>
           </td>
+          <td>
+            <button *ngIf="!showPay" (click)="toggleSelectedForPaymenet(u.id)" class="btn btn-primary">Pay</button>
+            <form *ngIf="showPay && payUserId===u.id" #payUserForm="ngForm" (ngSubmit)="payUser(payUserForm.value)" class="form form-inline">
+              <input [(ngModel)]="payAmount" required class="form-control" type="number" name="payAmount"/>
+              <button type="submit" class="btn btn-success">Confirm</button>
+            </form>
+          </td>
         </tr>
         <tr>
+          <th></th>
           <th></th>
           <th></th>
           <th></th>

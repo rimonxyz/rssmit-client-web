@@ -6,6 +6,7 @@ export interface IUser{
     username: string;
     password: string;
     enabled: boolean;
+    currentBalance: number;
     accountNonExpired: boolean;
     accountNonLocked: boolean;
     credentialsNonExpired: boolean;

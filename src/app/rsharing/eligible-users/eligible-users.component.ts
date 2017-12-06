@@ -3,6 +3,7 @@ import {UserPage} from "../../shared/model/user_page.model";
 import {UserService} from "../../shared/services/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {DateUtil} from "../../shared/utils/date.util";
+import {ToastrService} from "../../shared/services/toastr.service";
 
 @Component({
   selector: 'app-eligible-users',
@@ -15,8 +16,12 @@ export class EligibleUsersComponent implements OnInit {
   page: number;
   rshareId: number;
 
+  payUserId: number;
+  showPay: boolean;
+
   constructor(private userService: UserService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -45,4 +50,24 @@ export class EligibleUsersComponent implements OnInit {
     this.loadUsers(this.rshareId, this.page);
   }
 
+  toggleSelectedForPaymenet(userId: number) {
+    this.payUserId = userId;
+    this.showPay = !this.showPay;
+  }
+
+  payUser(formValues) {
+    if (formValues.payAmount == null || formValues.payAmount < 500) {
+      this.toastr.warning("Failed!", "Payment amount should be at least ৳500 or more!");
+      return;
+    }
+
+    this.userService.payUsers(this.payUserId, this.rshareId, formValues.payAmount).subscribe(t => {
+      this.toastr.success("Success!", "Payment (amount: " + formValues.payAmount + ") saved successfully." + t.explanation);
+      this.showPay = false;
+      return t;
+    }, err => {
+      this.toastr.error("Failed!", "Failed to save payment. Reason is: " + err.code);
+    });
+    console.log(formValues);
+  }
 }
