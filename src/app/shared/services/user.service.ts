@@ -20,8 +20,13 @@ export class UserService {
       .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
   }
 
-  getEligibleUsersForSharing(rshareId: number, page: number) {
+  getEligibleUsersForSharing(rshareId: number, page: number): Observable<UserPage> {
     return this.http.get(this.getEligibleUsersForSharingUrl(rshareId, page))
+      .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
+  }
+
+  getAlreadyPaidUsers(rshareId: number, page: number): Observable<UserPage> {
+    return this.http.get(this.getAlreadyPaidUsersUrl(rshareId, page))
       .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
   }
 
@@ -46,6 +51,10 @@ export class UserService {
 
   private getEligibleUsersForSharingUrl(rshareId: number, page: number) {
     return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/rshared/" + rshareId + "/eligibleUsers?page=" + page + "&access_token=" + this.auth.getAccessToken();
+  }
+
+  private getAlreadyPaidUsersUrl(rshareId: number, page: number) {
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/rshared/" + rshareId + "/paidUsers?page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 
   private getPayUserUrl(payUserId: number, rshareId: number, payAmount: number) {

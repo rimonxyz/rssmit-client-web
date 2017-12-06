@@ -12,8 +12,12 @@ import {ToastrService} from "../../shared/services/toastr.service";
 })
 export class EligibleUsersComponent implements OnInit {
 
-  userPage: UserPage;
-  page: number;
+  eligibleUsersPage: UserPage;
+  euPage: number;
+
+  alreadyPaidUsersPage: UserPage;
+  apPage: number;
+
   rshareId: number;
 
   payUserId: number;
@@ -25,29 +29,47 @@ export class EligibleUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.page = 0;
+    this.euPage = 0;
+    this.apPage = 0;
     this.rshareId = this.activatedRoute.snapshot.params['rshareId'];
-    this.loadEligibleUsers(this.rshareId, this.page);
+    this.loadEligibleUsers(this.rshareId, this.euPage);
+    this.loadAlreadyPaidUsers(this.rshareId, this.apPage);
   }
 
   loadEligibleUsers(rshareId: number, page: number) {
-    this.userService.getEligibleUsersForSharing(rshareId, page).subscribe((userPage: UserPage) => this.userPage = userPage);
+    this.userService.getEligibleUsersForSharing(rshareId, page).subscribe((userPage: UserPage) => this.eligibleUsersPage = userPage);
+  }
+
+  loadAlreadyPaidUsers(rshareId: number, page: number) {
+    this.userService.getAlreadyPaidUsers(rshareId, page).subscribe((userPage: UserPage) => this.alreadyPaidUsersPage = userPage);
   }
 
   getReadableDate(date: string): string {
     return DateUtil.formatReadableDate(new Date(date));
   }
 
-  loadPreviousPage() {
-    if (this.page > 0)
-      this.page--;
-    this.loadEligibleUsers(this.rshareId, this.page);
+  loadEuPreviousPage() {
+    if (this.euPage > 0)
+      this.euPage--;
+    this.loadEligibleUsers(this.rshareId, this.euPage);
   }
 
-  loadNextPage() {
-    if (this.page < this.userPage.size)
-      this.page++;
-    this.loadEligibleUsers(this.rshareId, this.page);
+  loadEuNextPage() {
+    if (this.euPage < this.eligibleUsersPage.size)
+      this.euPage++;
+    this.loadEligibleUsers(this.rshareId, this.euPage);
+  }
+
+  loadApPreviousPage() {
+    if (this.apPage > 0)
+      this.apPage--;
+    this.loadAlreadyPaidUsers(this.rshareId, this.apPage);
+  }
+
+  loadApNextPage() {
+    if (this.apPage < this.alreadyPaidUsersPage.size)
+      this.apPage++;
+    this.loadAlreadyPaidUsers(this.rshareId, this.apPage);
   }
 
   toggleSelectedForPaymenet(userId: number) {
@@ -64,7 +86,8 @@ export class EligibleUsersComponent implements OnInit {
     this.userService.payUsers(this.payUserId, this.rshareId, formValues.payAmount).subscribe(t => {
       this.toastr.success("Success!", "Payment (amount: " + formValues.payAmount + ") saved successfully." + t.explanation);
       this.showPay = false;
-      this.loadEligibleUsers(this.rshareId, this.page);
+      this.loadEligibleUsers(this.rshareId, this.euPage);
+      this.loadAlreadyPaidUsers(this.rshareId, this.apPage);
       return t;
     }, err => {
       this.toastr.error("Failed!", "Failed to save payment. Reason is: " + err.code);
