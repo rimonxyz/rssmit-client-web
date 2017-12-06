@@ -27,10 +27,10 @@ export class EligibleUsersComponent implements OnInit {
   ngOnInit() {
     this.page = 0;
     this.rshareId = this.activatedRoute.snapshot.params['rshareId'];
-    this.loadUsers(this.rshareId, this.page);
+    this.loadEligibleUsers(this.rshareId, this.page);
   }
 
-  loadUsers(rshareId: number, page: number) {
+  loadEligibleUsers(rshareId: number, page: number) {
     this.userService.getEligibleUsersForSharing(rshareId, page).subscribe((userPage: UserPage) => this.userPage = userPage);
   }
 
@@ -41,13 +41,13 @@ export class EligibleUsersComponent implements OnInit {
   loadPreviousPage() {
     if (this.page > 0)
       this.page--;
-    this.loadUsers(this.rshareId, this.page);
+    this.loadEligibleUsers(this.rshareId, this.page);
   }
 
   loadNextPage() {
     if (this.page < this.userPage.size)
       this.page++;
-    this.loadUsers(this.rshareId, this.page);
+    this.loadEligibleUsers(this.rshareId, this.page);
   }
 
   toggleSelectedForPaymenet(userId: number) {
@@ -64,6 +64,7 @@ export class EligibleUsersComponent implements OnInit {
     this.userService.payUsers(this.payUserId, this.rshareId, formValues.payAmount).subscribe(t => {
       this.toastr.success("Success!", "Payment (amount: " + formValues.payAmount + ") saved successfully." + t.explanation);
       this.showPay = false;
+      this.loadEligibleUsers(this.rshareId, this.page);
       return t;
     }, err => {
       this.toastr.error("Failed!", "Failed to save payment. Reason is: " + err.code);
