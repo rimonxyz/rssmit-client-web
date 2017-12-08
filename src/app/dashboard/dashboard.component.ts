@@ -3,6 +3,7 @@ import {Auth} from "../shared/services/auth.service";
 import {ToastrService} from "../shared/services/toastr.service";
 import {EventStats} from "../shared/model/event_stats.model";
 import {EventService} from "../shared/services/event.service";
+import { EventPage } from '../shared/model/event-page.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,8 +16,10 @@ export class DashboardComponent implements OnInit {
   clientIdVisible: boolean;
   clientSecretVisible: boolean;
 
-  eventStats: EventStats;
+  eventStats: EventStats = new EventStats();
   period: string;
+
+  eventsPage: EventPage = new EventPage();
 
   constructor(private eventService: EventService, private toastr: ToastrService, private auth: Auth) {
   }
@@ -26,7 +29,19 @@ export class DashboardComponent implements OnInit {
     this.clientSecret = this.auth.getClientSecret();
 
     // get event statistics
-    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.refreshToken());
+    this.loadEventStats();
+    this.loadEventPage(0);  
+  }
+
+  loadEventStats():void {
+    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.refreshToken());    
+  }
+
+  loadEventPage(page: number) {
+    this.eventService.getEvents(0).subscribe(eventsPage => {
+      this.eventsPage = eventsPage
+      console.log(this.eventsPage);
+    }, err => this.auth.refreshToken());
   }
 
   onEventStatsPeriodChange(period: string): void{
