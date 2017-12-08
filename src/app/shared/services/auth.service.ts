@@ -3,16 +3,16 @@ import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {ClientDetails} from '../model/client_details.model';
 import {UserAuth} from '../model/user_auth.model';
-import {LocalStorage} from './local-storage.service';
 import {ToastrService} from './toastr.service';
 import {CanActivate, Router} from "@angular/router";
 import {ApiEndpoints} from "./api.endpoints";
+import {LocalStorage} from "./local-storage.service";
 
 
 @Injectable()
 export class Auth implements CanActivate{
 
-  constructor(private http: Http, private storage: LocalStorage, private toastr: ToastrService, private router: Router) {
+  constructor(private http: Http,  private toastr: ToastrService, private router: Router) {
   }
 
   canActivate(): boolean{
@@ -26,11 +26,11 @@ export class Auth implements CanActivate{
   }
 
   isLoggedIn(): boolean {
-    return this.storage.retrive(this.storage.KEYS.accessToken) != null;
+    return LocalStorage.retrive(LocalStorage.KEYS.accessToken) != null;
   }
 
   logout():void{
-    this.storage.clear();
+    LocalStorage.clear();
     this.toastr.warning('You\'ve been logged out!','Please login to continue.');
     this.router.navigate(['/login']);
   }
@@ -38,13 +38,13 @@ export class Auth implements CanActivate{
   login(username: string, password: string) {
     return this.getClientCredentials(username, password).subscribe(clientDetails => {
       // save client id and secret to local storage
-      this.storage.put(this.storage.KEYS.clientId,clientDetails.clientId);
-      this.storage.put(this.storage.KEYS.clientSecret,clientDetails.clientSecret);
+      LocalStorage.put(LocalStorage.KEYS.clientId,clientDetails.clientId);
+      LocalStorage.put(LocalStorage.KEYS.clientSecret,clientDetails.clientSecret);
 
       const loginUrl: string = this.getLoginUrl(username, password, clientDetails.clientId, clientDetails.clientSecret);
       const userAuth: Observable<UserAuth> = this.http.get(loginUrl).map((response: Response) => <UserAuth>response.json()).catch(this.handleError);
       userAuth.subscribe(userAuth => {
-        this.storage.putAuth(userAuth);
+        LocalStorage.putAuth(userAuth);
         this.toastr.success('Success', 'Successfully logged in!');
         this.router.navigate(['/dashboard']);
         window.location.href = "/dashboard";
@@ -59,26 +59,26 @@ export class Auth implements CanActivate{
   refreshToken() {
     const userAuth: Observable<UserAuth> = this.http.get(this.getRefreshTokenUrl()).map((response: Response) => <UserAuth>response.json()).catch(this.handleError);
     userAuth.subscribe((userAuth: UserAuth)=>{
-      this.storage.putAuth(userAuth);
+      LocalStorage.putAuth(userAuth);
       this.router.navigate(['/dashboard'])
       this.toastr.success("Refresh Token","Token has been refreshed!");
     },err=>this.logout());
   }
 
   getAccessToken(): string{
-    return <string>this.storage.retrive(this.storage.KEYS.accessToken);
+    return <string>LocalStorage.retrive(LocalStorage.KEYS.accessToken);
   }
 
   getRefreshToken(): string{
-    return <string>this.storage.retrive(this.storage.KEYS.refreshToken);
+    return <string>LocalStorage.retrive(LocalStorage.KEYS.refreshToken);
   }
 
   getClientId(): string {
-    return <string>this.storage.retrive(this.storage.KEYS.clientId);
+    return <string>LocalStorage.retrive(LocalStorage.KEYS.clientId);
   }
 
   getClientSecret(): string {
-    return <string>this.storage.retrive(this.storage.KEYS.clientSecret);
+    return <string>LocalStorage.retrive(LocalStorage.KEYS.clientSecret);
   }
 
   getLoginUrl(username: string, password: string, clientId: string, clientSecret: string): string {

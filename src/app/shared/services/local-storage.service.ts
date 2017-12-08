@@ -1,36 +1,34 @@
-import {Injectable} from '@Angular/core';
-import {LocalStorageService} from 'angular-2-local-storage';
 import {UserAuth} from '../model/user_auth.model';
 
-@Injectable()
 export class LocalStorage{
 
-    public KEYS: any = {
+  public static KEYS: any = {
         clientId : "client_id",
         clientSecret: "client_secret",
         accessToken: "access_token",
         refreshToken: "refresh_token"
-    }
+  }
 
-    constructor(private localStorage: LocalStorageService){}
+  constructor() {
+  }
 
-    put(key: string,value: string){
-        this.localStorage.set(key,value);
-    }
+  static put(key: string, value: string) {
+    localStorage.setItem(key, value);
+  }
 
-    retrive(key: string){
-        return this.localStorage.get(key);
-    }
+  static retrive(key: string) {
+    return localStorage.getItem(key);
+  }
 
-    putAuth(userAuth: UserAuth){
-        this.localStorage.set(this.KEYS.accessToken,userAuth.access_token);
-        this.localStorage.set(this.KEYS.refreshToken,userAuth.refresh_token);
-    }
+  static putAuth(userAuth: UserAuth) {
+    localStorage.setItem(this.KEYS.accessToken, userAuth.access_token);
+    localStorage.setItem(this.KEYS.refreshToken, userAuth.refresh_token);
+  }
 
-  clear(): void{
-    this.localStorage.remove(this.KEYS.accessToken);
-    this.localStorage.remove(this.KEYS.refreshToken);
-    this.localStorage.remove(this.KEYS.clientId);
-    this.localStorage.remove(this.KEYS.clientSecret)
+  static clear(): void {
+    localStorage.removeItem(this.KEYS.accessToken);
+    localStorage.removeItem(this.KEYS.refreshToken);
+    localStorage.removeItem(this.KEYS.clientId);
+    localStorage.removeItem(this.KEYS.clientSecret)
   }
 }
