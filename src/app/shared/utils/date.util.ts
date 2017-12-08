@@ -31,4 +31,19 @@ export class DateUtil {
     return this.monthNamesShort[monthIndex] + ' ' + day + ', ' + year;
   }
 
+  public static isInValidDateForSharing(month: string, year: number) {
+    if (month == null || year == null) return true;
+
+    let mNumber: number;
+    DateUtil.monthNames.forEach((m, i) => {
+      if (m.toLowerCase() === month.toLowerCase())
+        mNumber = i + 1;
+    });
+    let date: Date = new Date();
+    date.setFullYear(year, mNumber - 1, 15);
+    console.log(mNumber + " " + month + " " + year);
+    console.log(date);
+    return date >= new Date();
+  }
+
 }

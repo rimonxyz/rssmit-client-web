@@ -24,9 +24,12 @@
           <label class="form-label semibold">Total Revenue:</label>
           <div class="form-control-wrapper form-control-icon-left">
             <input [(ngModel)]="totalRevenue" name="totalRevenue" type="number" class="form-control"
-                   placeholder="Left"/>
+                   placeholder="Left" required/>
             <i class="fa fa-money"></i>
           </div>
+          <em *ngIf="shareRevForm.controls.totalRevenue?.invalid && shareRevForm.controls.totalRevenue?.touched">*Required!<br/></em>
+          <em *ngIf="shareRevForm.controls.totalRevenue?.value<5000 && shareRevForm.controls.totalRevenue?.touched">*You
+            can not share revenue less than 5000</em>
         </div>
       </div>
       <div class="col-lg-2">
@@ -34,17 +37,19 @@
           <label class="form-label semibold">Sharing Percentage:</label>
           <div class="form-control-wrapper form-control-icon-left">
             <input [(ngModel)]="sharePercentage" name="sharePercentage" type="number" class="form-control"
-                   placeholder="Left"/>
+                   placeholder="Left" required/>
             <i class="fa fa-percent"></i>
           </div>
+          <em *ngIf="shareRevForm.controls.sharePercentage?.invalid && shareRevForm.controls.sharePercentage?.touched">*Required!</em>
+          <em *ngIf="shareRevForm.controls.sharePercentage?.value>100">*Should be less than 100</em>
         </div>
       </div>
 
       <div class="col-lg-3">
         <div class="form-group">
-          <label class="form-label semibold">From:</label>
-          <div class="form-control-wrapper form-control-icon-left">
-            <select [(ngModel)]="month" name="month" class="form-control">
+          <label class="form-label semibold">Month:</label>
+          <div class="form-control-wrapper">
+            <select [(ngModel)]="month" name="month" class="form-control" required>
               <option value="january">January</option>
               <option value="february">February</option>
               <option value="march">March</option>
@@ -59,27 +64,28 @@
               <option value="december">December</option>
             </select>
             <!--<input [(ngModel)]="fromDate" name="fromDate" type="date" class="form-control" placeholder="Left"/>-->
-            <i class="fa fa-calendar"></i>
+            <!--<i class="fa fa-calendar"></i>-->
           </div>
+          <em *ngIf="isInvalidDate()">You can only share revenues for last month or earlier!</em>
         </div>
       </div>
       <div class="col-lg-3">
         <div class="form-group">
-          <label class="form-label semibold">To:</label>
-          <div class="form-control-wrapper form-control-icon-left">
-            <select [(ngModel)]="year" name="year" class="form-control">
+          <label class="form-label semibold">Year:</label>
+          <div class="form-control-wrapper">
+            <select [(ngModel)]="year" name="year" class="form-control" required>
               <option value="2017">2017</option>
-              <option value="2017">2018</option>
-              <option value="2017">2019</option>
-              <option value="2017">2020</option>
-              <option value="2017">2021</option>
-              <option value="2017">2022</option>
-              <option value="2017">2023</option>
-              <option value="2017">2024</option>
-              <option value="2017">2025</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
             </select>
             <!--<input [(ngModel)]="toDate" name="toDate" type="date" class="form-control" placeholder="Left"/>-->
-            <i class="fa fa-calendar"></i>
+            <!--<i class="fa fa-calendar"></i>-->
           </div>
         </div>
       </div>
@@ -87,7 +93,12 @@
         <div class="form-group">
           <label class="form-label semibold">Share</label>
           <div class="form-control-wrapper form-control-icon-left">
-            <button type="submit" class="form-control btn btn-primary btn-rounded" placeholder="Left">Share</button>
+            <button type="submit" class="form-control btn btn-primary btn-rounded" placeholder="Left"
+                    [disabled]="shareRevForm.invalid
+            || shareRevForm.controls.sharePercentage?.value>100
+            || shareRevForm.controls.totalRevenue?.value<5000
+            || isInvalidDate()">Share
+            </button>
           </div>
         </div>
       </div>

@@ -22,6 +22,8 @@ export class RShareComponent implements OnInit {
 
   ngOnInit() {
     this.page = 0;
+    // init share dates
+
     this.fetchRSharedPage();
   }
 
@@ -64,10 +66,14 @@ export class RShareComponent implements OnInit {
   }
 
   onMonthInputChange(month: string) {
-    this.month = this.month;
+    this.month = month;
   }
 
   onYearInputChange(year: string) {
     this.year = year;
+  }
+
+  isInvalidDate(): boolean {
+    return DateUtil.isInValidDateForSharing(this.month, +this.year);
   }
 }

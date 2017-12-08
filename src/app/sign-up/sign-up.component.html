@@ -1,7 +1,7 @@
 <div class="page-center">
   <div class="page-center-in">
       <div class="container-fluid">
-          <form  #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)" class="sign-box" style="margin-left:40%;margin-right:40%;">
+          <form  #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm.value)" class="sign-box col-sm-4 sign-in-box">
               <div class="sign-avatar">
                   <!-- <img src="../assets/img/avatar-sign.png" alt=""> -->
               </div>
@@ -27,8 +27,8 @@
                       <a href="reset-password.html">Reset Password</a>
                   </div>
               </div><br/>
-              <button type="submit" class="btn btn-rounded">Sign Up</button>
-              <p class="sign-note">New to our website? <a href="/login">Sign In</a></p>
+              <button type="submit" class="btn btn-rounded pull-right">Sign Up</button>
+              <p class="sign-note">New to our website? <a [routerLink]="['/login']">Sign In</a></p>
               <!--<button type="button" class="close">
                   <span aria-hidden="true">&times;</span>
               </button>-->
