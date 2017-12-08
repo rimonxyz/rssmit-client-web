@@ -23,7 +23,8 @@ export class RShareComponent implements OnInit {
   ngOnInit() {
     this.page = 0;
     // init share dates
-
+    this.month = DateUtil.getLastMonthString(new Date()).toLowerCase();
+    this.year = DateUtil.getLastMonthYear(this.month) + "";
     this.fetchRSharedPage();
   }
 
@@ -65,8 +66,8 @@ export class RShareComponent implements OnInit {
     return DateUtil.formatReadableDate(d);
   }
 
-  onMonthInputChange(month: string) {
-    this.month = month;
+  onMonthInputChange() {
+    this.year = DateUtil.getLastMonthYear(this.month) + "";
   }
 
   onYearInputChange(year: string) {
