@@ -6,7 +6,7 @@ import {UserAuth} from '../model/user_auth.model';
 import {ToastrService} from './toastr.service';
 import {CanActivate, Router} from "@angular/router";
 import {ApiEndpoints} from "./api.endpoints";
-import {LocalStorage} from "./local-storage.service";
+import {LocalStorage} from "../utils/storage.util";
 
 
 @Injectable()
