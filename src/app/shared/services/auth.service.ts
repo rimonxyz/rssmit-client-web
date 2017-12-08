@@ -56,6 +56,15 @@ export class Auth implements CanActivate{
     });
   }
 
+  refreshToken() {
+    const userAuth: Observable<UserAuth> = this.http.get(this.getRefreshTokenUrl()).map((response: Response) => <UserAuth>response.json()).catch(this.handleError);
+    userAuth.subscribe((userAuth: UserAuth)=>{
+      this.storage.putAuth(userAuth);
+      this.router.navigate(['/dashboard'])
+      this.toastr.success("Refresh Token","Token has been refreshed!");
+    },err=>this.logout());
+  }
+
   getAccessToken(): string{
     return <string>this.storage.retrive(this.storage.KEYS.accessToken);
   }
@@ -64,9 +73,20 @@ export class Auth implements CanActivate{
     return <string>this.storage.retrive(this.storage.KEYS.refreshToken);
   }
 
+  getClientId(): string {
+    return <string>this.storage.retrive(this.storage.KEYS.clientId);
+  }
+
+  getClientSecret(): string {
+    return <string>this.storage.retrive(this.storage.KEYS.clientSecret);
+  }
 
   getLoginUrl(username: string, password: string, clientId: string, clientSecret: string): string {
     return ApiEndpoints.BASE_URL + '/oauth/token?grant_type=password&client_id=' + clientId + '&client_secret=' + clientSecret + '&username=' + username + '&password=' + password;
+  }
+
+  getRefreshTokenUrl(): string {
+    return ApiEndpoints.BASE_URL + '/oauth/token?grant_type=refresh_token&client_id=' + this.getClientId() + '&client_secret=' + this.getClientSecret() + '&refresh_token=' + this.getRefreshToken();
   }
 
 

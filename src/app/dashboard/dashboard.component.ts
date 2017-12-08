@@ -27,12 +27,12 @@ export class DashboardComponent implements OnInit {
     this.clientSecret = this.storage.retrive(this.storage.KEYS.clientSecret) + '';
 
     // get event statistics
-    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.logout());
+    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.refreshToken());
   }
 
   onEventStatsPeriodChange(period: string): void{
     this.period = period;
-    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.logout());
+    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.refreshToken());
   }
 
   toggleClientIdVisibility(): void {

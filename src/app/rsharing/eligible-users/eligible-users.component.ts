@@ -4,6 +4,7 @@ import {UserService} from "../../shared/services/user.service";
 import {ActivatedRoute} from "@angular/router";
 import {DateUtil} from "../../shared/utils/date.util";
 import {ToastrService} from "../../shared/services/toastr.service";
+import {Auth} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-eligible-users',
@@ -25,7 +26,8 @@ export class EligibleUsersComponent implements OnInit {
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private auth: Auth) {
   }
 
   ngOnInit() {
@@ -37,11 +39,13 @@ export class EligibleUsersComponent implements OnInit {
   }
 
   loadEligibleUsers(rshareId: number, page: number) {
-    this.userService.getEligibleUsersForSharing(rshareId, page).subscribe((userPage: UserPage) => this.eligibleUsersPage = userPage);
+    this.userService.getEligibleUsersForSharing(rshareId, page)
+      .subscribe((userPage: UserPage) => this.eligibleUsersPage = userPage,err=>this.auth.refreshToken());
   }
 
   loadAlreadyPaidUsers(rshareId: number, page: number) {
-    this.userService.getAlreadyPaidUsers(rshareId, page).subscribe((userPage: UserPage) => this.alreadyPaidUsersPage = userPage);
+    this.userService.getAlreadyPaidUsers(rshareId, page)
+      .subscribe((userPage: UserPage) => this.alreadyPaidUsersPage = userPage,err=>console.log(err));
   }
 
   getReadableDate(date: string): string {
@@ -90,7 +94,8 @@ export class EligibleUsersComponent implements OnInit {
       this.loadAlreadyPaidUsers(this.rshareId, this.apPage);
       return t;
     }, err => {
-      this.toastr.error("Failed!", "Failed to save payment. Reason is: " + err.code);
+      this.toastr.warning("We\'re sorry..","We\'re working on it! Please try again in a little while. This time it won\'t happen I promise!");
+      this.auth.refreshToken();
     });
     console.log(formValues);
   }

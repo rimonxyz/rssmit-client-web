@@ -39,11 +39,13 @@ export class EarningComponent implements OnInit {
   }
 
   loadTransactions(userId: number) {
-    this.trnxService.getTransactions(this.userId).subscribe((trnxPage: TransactionPage) => this.trnxPage = trnxPage, err => console.log(err));
+    this.trnxService.getTransactions(this.userId)
+      .subscribe((trnxPage: TransactionPage) => this.trnxPage = trnxPage, err => this.auth.refreshToken());
   }
 
   loadSingleUserRevenue(userId: number, month: string, year: string) {
-    this.rSharingService.getSingleUserRevenue(userId, month, year).subscribe(r => this.userRev = r, err => console.log("FUCK! " + err));
+    this.rSharingService.getSingleUserRevenue(userId, month, year)
+      .subscribe(r => this.userRev = r, err => console.log(err));
   }
 
   onMonthInputChange(month: string): void {

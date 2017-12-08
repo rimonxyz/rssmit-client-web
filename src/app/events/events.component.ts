@@ -15,7 +15,7 @@ export class EventsComponent implements OnInit {
   eventsPage: EventPage;
   page: number;
 
-  constructor(private eventService: EventService, private auth: Auth, private toastr: ToastrService, private router: Router) {
+  constructor(private eventService: EventService, private auth: Auth) {
   }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class EventsComponent implements OnInit {
       console.log("Loaded page: " + this.page);
       this.eventsPage = eventsPage
       console.log(this.eventsPage);
-    }, err => this.auth.logout());
+    }, err => this.auth.refreshToken());
   }
 
   getWeightPercentage(value: number) {
