@@ -12,6 +12,10 @@ import {ToastrService} from '../shared/services/toastr.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
 
   constructor(private userService: UserService,
               private router: Router,

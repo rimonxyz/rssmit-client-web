@@ -12,6 +12,9 @@ import {Auth} from "../../shared/services/auth.service";
   styleUrls: ['./rshare.component.css']
 })
 export class RShareComponent implements OnInit {
+  // model bind
+  totalRevenue: string;
+  sharePercentage: string;
 
   rSharedPage: RSharedPage;
   page: number;
