@@ -1,7 +1,7 @@
 export class UserRev {
   currentMonthInteractionPoints: number;
   currentBalance: number;
-  previousMonthInteractionPoints: number;
+  lastPaymentAmount: number;
   previousMonthIncome: number;
   from: Date;
   to: Date;
