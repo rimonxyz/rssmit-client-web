@@ -2,14 +2,15 @@ import {Injectable} from "@angular/core";
 import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {EventPage} from "../model/event-page.model";
-import {LocalStorage} from "./local-storage.service";
 import {Event} from "../model/event.model";
 import {EventStats} from "../model/event_stats.model";
+import {ApiEndpoints} from "./api.endpoints";
+import {Auth} from "./auth.service";
 
 @Injectable()
 export class EventService {
 
-  constructor(private http: Http, private storage: LocalStorage) {
+  constructor(private http: Http, private auth: Auth) {
   }
 
   getEvents(page: number): Observable<EventPage> {
@@ -31,11 +32,11 @@ export class EventService {
   }
 
   getEventPageUrl(page: number): string {
-    return 'http://172.104.166.238:9090/api/v1/events?page=' + page + '&access_token=' + this.storage.retrive(this.storage.KEYS.accessToken);
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/events?page=' + page + '&access_token=' + this.auth.getAccessToken();
   }
 
   getEventStatsUrl(period: string) {
-    return 'http://172.104.166.238:9090/api/v1/events/stats?period=' + period + '&access_token=' + this.storage.retrive(this.storage.KEYS.accessToken);
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/events/stats?period=' + period + '&access_token=' + this.auth.getAccessToken();
   }
 
   private handleError(error: Response) {

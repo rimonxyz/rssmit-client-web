@@ -1,0 +1,165 @@
+<section class="box-typical">
+  <header class="box-typical-header">
+    <div class="tbl-row">
+      <div class="tbl-cell tbl-cell-title">
+        <h3><a href="/events">Payment Requests</a><br/>
+          ( Total: <span>{{unpaidPrPage?.totalElements}} users</span> ,
+          Showing {{unpaidPrPage?.size}} users/page,
+          Page: <span>{{upPage+1}}</span> )
+        </h3>
+      </div>
+    </div>
+  </header>
+  <div class="box-typical-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+        <tr>
+          <th></th>
+          <th>Requested By</th>
+          <th>Email</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let pr of unpaidPrPage?.content">
+          <td class="table-check">
+            <div class="checkbox checkbox-only">
+              <input type="checkbox" id="tbl-check-1"/>
+              <label for="tbl-check-1"></label>
+            </div>
+          </td>
+          <td>{{pr.user?.name}}</td>
+          <td>{{pr.user.email}}</td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Payment Method</div>
+            {{pr.paymentMethod}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Account No</div>
+            {{pr.accountNumber}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Request Amount</div>
+            <span class="text text-success">৳{{pr.requestAmount}}</span>
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Requested On</div>
+            {{getReadableDate(pr.created)}}
+          </td>
+          <td>
+            <button [routerLink]="['/users/earnings',pr.user.id]" class="btn btn-primary">Earnings</button>
+          </td>
+          <td>
+            <button *ngIf="!showPay" (click)="toggleSelectedForPaymenet(pr.user?.id)" class="btn btn-primary">Pay</button>
+            <form *ngIf="showPay && payUserId===pr.user.id" #payUserForm="ngForm" (ngSubmit)="payUser(pr.id,payUserForm.value)" class="form form-inline">
+              <input [(ngModel)]="payAmount" required class="form-control" type="number" name="payAmount" placeholder="Amount"/>
+              <input [(ngModel)]="trnxId" required class="form-control" type="text" name="trnxId" placeholder="TrnxId"/>
+              <button type="submit" class="btn btn-success">Confirm</button>
+              <button (click)="toggleSelectedForPaymenet(pr.user?.id)" class="btn btn-warning">Cancel</button>
+            </form>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>
+            <button [disabled]="unpaidPrPage?.first" (click)="loadUnpaidPreviousPage()" class="btn btn-primary">
+              Previous
+            </button>
+            &nbsp;&nbsp;<button [disabled]="unpaidPrPage?.last" (click)="loadUnpaidNextPage()" class="btn btn-primary">
+            Next
+          </button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!--.box-typical-body-->
+</section><!--.box-typical-->
+
+
+<section class="box-typical">
+  <header class="box-typical-header">
+    <div class="tbl-row">
+      <div class="tbl-cell tbl-cell-title">
+        <h3><a href="/events">Resolved Requests</a><br/>
+          ( Total: <span>{{paidPrPage?.totalElements}} users</span> ,
+          Showing {{paidPrPage?.size}} users/page,
+          Page: <span>{{pPage+1}}</span> )
+        </h3>
+      </div>
+    </div>
+  </header>
+  <div class="box-typical-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+        <tr>
+          <th></th>
+          <th>Requested By</th>
+          <th>Email</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let pr of paidPrPage?.content">
+          <td class="table-check">
+            <div class="checkbox checkbox-only">
+              <input type="checkbox" id="tbl-check-1"/>
+              <label for="tbl-check-1"></label>
+            </div>
+          </td>
+          <td>{{pr.user?.name}}</td>
+          <td>{{pr.user.email}}</td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Payment Method</div>
+            {{pr.paymentMethod}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Account No</div>
+            {{pr.accountNumber}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Request Amount</div>
+            <span class="text text-success">৳{{pr.requestAmount}}</span>
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Requested On</div>
+            {{getReadableDate(pr.created)}}
+          </td>
+          <td>
+            <button [routerLink]="['/users/earnings',pr.user.id]" class="btn btn-primary">Earnings</button>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>
+            <button [disabled]="paidPrPage?.first" (click)="loadPaidPreviousPage()" class="btn btn-primary">
+              Previous
+            </button>
+            &nbsp;&nbsp;<button [disabled]="paidPrPage?.last" (click)="loadPaidNextPage()" class="btn btn-primary">
+            Next
+          </button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!--.box-typical-body-->
+</section><!--.box-typical-->

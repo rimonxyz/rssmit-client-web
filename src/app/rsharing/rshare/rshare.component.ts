@@ -4,6 +4,7 @@ import {RShared} from "../../shared/model/rshared.model";
 import {RSharedPage} from "../../shared/model/rshared_page.model";
 import {ToastrService} from "../../shared/services/toastr.service";
 import {DateUtil} from "../../shared/utils/date.util";
+import {Auth} from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-create-rshare',
@@ -11,17 +12,25 @@ import {DateUtil} from "../../shared/utils/date.util";
   styleUrls: ['./rshare.component.css']
 })
 export class RShareComponent implements OnInit {
+  // model bind
+  totalRevenue: string;
+  sharePercentage: string;
 
   rSharedPage: RSharedPage;
   page: number;
   month: string;
   year: string;
 
-  constructor(private rsharingService: RsharingService, private toastr: ToastrService) {
+  constructor(private rsharingService: RsharingService,
+              private toastr: ToastrService,
+              private auth: Auth) {
   }
 
   ngOnInit() {
     this.page = 0;
+    // init share dates
+    this.month = DateUtil.getLastMonthString(new Date()).toLowerCase();
+    this.year = DateUtil.getLastMonthYear(this.month) + "";
     this.fetchRSharedPage();
   }
 
@@ -34,7 +43,10 @@ export class RShareComponent implements OnInit {
     this.rsharingService.createRShared(rShared).subscribe((rs: RShared) => {
       this.toastr.success('Success!', 'Successfully created a sharing entity!');
       this.fetchRSharedPage();
-    }, err => console.log(err.message));
+    }, err => {
+      this.toastr.warning("We\'re sorry..","We\'re working on it! Please try again in a little while. This time it won\'t happen I promise!");
+      this.auth.refreshToken();
+    });
   }
 
   fetchRSharedPage() {
@@ -42,7 +54,7 @@ export class RShareComponent implements OnInit {
       this.rSharedPage = rsp;
       console.log(this.rSharedPage);
     }, err => {
-      console.log(err);
+      this.auth.refreshToken();
     });
   }
 
@@ -63,11 +75,15 @@ export class RShareComponent implements OnInit {
     return DateUtil.formatReadableDate(d);
   }
 
-  onMonthInputChange(month: string) {
-    this.month = this.month;
+  onMonthInputChange() {
+    this.year = DateUtil.getLastMonthYear(this.month) + "";
   }
 
   onYearInputChange(year: string) {
     this.year = year;
+  }
+
+  isInvalidDate(): boolean {
+    return DateUtil.isInValidDateForSharing(this.month, +this.year);
   }
 }

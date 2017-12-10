@@ -15,17 +15,16 @@ import {CtrlPanelContainerComponent} from './ctrl-panel-container/ctrl-panel-con
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {LoginComponent} from './login/login.component';
 
-import {LocalStorageModule} from 'angular-2-local-storage';
 import {SignUpComponent} from './sign-up/sign-up.component';
 
 import {UserService} from './shared/services/user.service';
 import {Auth} from './shared/services/auth.service';
-import {LocalStorage} from './shared/services/local-storage.service';
 import {ToastrService} from './shared/services/toastr.service';
 import {LogoutComponent} from './logout/logout.component';
 import {EventsComponent} from './events/events.component';
 import {EventService} from "./shared/services/event.service";
 import {RsharingService} from "./shared/services/rsharing.service";
+import {TransactionService} from "./shared/services/transaction.service";
 
 @NgModule({
   declarations: [
@@ -42,20 +41,16 @@ import {RsharingService} from "./shared/services/rsharing.service";
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    LocalStorageModule.withConfig({
-      prefix: 'rssmit',
-      storageType: 'localStorage'
-    }),
     FormsModule,
     HttpModule
   ],
   providers: [
     UserService,
     Auth,
-    LocalStorage,
     ToastrService,
     EventService,
-    RsharingService
+    RsharingService,
+    TransactionService
   ],
   bootstrap: [AppComponent]
 })

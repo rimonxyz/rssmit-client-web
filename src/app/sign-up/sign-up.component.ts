@@ -12,8 +12,14 @@ import {ToastrService} from '../shared/services/toastr.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
 
-  constructor(private userService: UserService,private router: Router,private toastrService: ToastrService) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private toastrService: ToastrService) { }
 
   ngOnInit() {
   }
@@ -23,6 +29,8 @@ export class SignUpComponent implements OnInit {
     userResponse.subscribe(u=>{
       this.router.navigate(["/login"]);
       this.toastrService.success("Success","Registration Successful");
+    },err=>{
+      this.toastrService.error("Failed!", "Could not sign up. Please provide valid informations!");
     });
   }
 }
