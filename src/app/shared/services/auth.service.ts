@@ -46,7 +46,7 @@ export class Auth implements CanActivate{
       userAuth.subscribe(userAuth => {
         LocalStorage.putAuth(userAuth);
         this.toastr.success('Success', 'Successfully logged in!');
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
         window.location.href = "/dashboard";
       });
     },e=>{
@@ -60,7 +60,7 @@ export class Auth implements CanActivate{
     const userAuth: Observable<UserAuth> = this.http.get(this.getRefreshTokenUrl()).map((response: Response) => <UserAuth>response.json()).catch(this.handleError);
     userAuth.subscribe((userAuth: UserAuth)=>{
       LocalStorage.putAuth(userAuth);
-      this.router.navigate(['/dashboard'])
+      this.router.navigate(['/'])
       this.toastr.success("Refresh Token","Token has been refreshed!");
     },err=>this.logout());
   }
