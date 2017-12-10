@@ -87,7 +87,7 @@ export class EligibleUsersComponent implements OnInit {
       return;
     }
 
-    this.userService.payUsers(this.payUserId, this.rshareId, formValues.payAmount).subscribe(t => {
+    this.userService.payUsers(this.payUserId, this.rshareId, formValues.payAmount,formValues.trnxId).subscribe(t => {
       this.toastr.success("Success!", "Payment (amount: " + formValues.payAmount + ") saved successfully." + t.explanation);
       this.showPay = false;
       this.loadEligibleUsers(this.rshareId, this.euPage);

@@ -57,19 +57,19 @@ export class UserService {
     return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/rshared/" + rshareId + "/paidUsers?page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 
-  private getPayUserUrl(payUserId: number, rshareId: number, payAmount: number) {
+  private getPayUserUrl(payUserId: number, rshareId: number, payAmount: number, trnxId: string) {
     return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/transactions/create?access_token=" + this.auth.getAccessToken()
       + "&userId=" + payUserId
       + "&rShareId=" + rshareId
-      + "&amount=" + payAmount;
+      + "&amount=" + payAmount + "&trnxId=" + trnxId;
   }
 
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
   }
 
-  payUsers(payUserId: number, rshareId: number, payAmount: number): Observable<Transaction> {
-    return this.http.post(this.getPayUserUrl(payUserId, rshareId, payAmount), null).map((response: Response) => {
+  payUsers(payUserId: number, rshareId: number, payAmount: number, trnxId: string): Observable<Transaction> {
+    return this.http.post(this.getPayUserUrl(payUserId, rshareId, payAmount, trnxId), null).map((response: Response) => {
       let r = response.json();
       r.created = new Date(r.created);
       r.lastUpdated = new Date(r.lastUpdated);

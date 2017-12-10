@@ -32,7 +32,7 @@ export class EventService {
   }
 
   getEventPageUrl(page: number): string {
-    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + 'events?page=' + page + '&access_token=' + this.auth.getAccessToken();
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/events?page=' + page + '&access_token=' + this.auth.getAccessToken();
   }
 
   getEventStatsUrl(period: string) {

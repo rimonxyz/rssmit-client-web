@@ -5,6 +5,7 @@ import {RouterModule} from "@angular/router";
 import {rsharingRoutes} from "./rsharing.route";
 import {FormsModule} from "@angular/forms";
 import { EligibleUsersComponent } from './eligible-users/eligible-users.component';
+import { PaymentRequestsComponent } from './payment-requests/payment-requests.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { EligibleUsersComponent } from './eligible-users/eligible-users.componen
     RouterModule.forChild(rsharingRoutes),
     FormsModule
   ],
-  declarations: [RShareComponent, EligibleUsersComponent]
+  declarations: [RShareComponent, EligibleUsersComponent, PaymentRequestsComponent]
 })
 export class RSharingModule { }
