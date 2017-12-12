@@ -6,7 +6,8 @@ export class LocalStorage{
         clientId : "client_id",
         clientSecret: "client_secret",
         accessToken: "access_token",
-        refreshToken: "refresh_token"
+    refreshToken: "refresh_token",
+    authorities: "refresh_token"
   }
 
   constructor() {
@@ -23,6 +24,7 @@ export class LocalStorage{
   static putAuth(userAuth: UserAuth) {
     localStorage.setItem(this.KEYS.accessToken, userAuth.access_token);
     localStorage.setItem(this.KEYS.refreshToken, userAuth.refresh_token);
+    localStorage.setItem(this.KEYS.authorities, JSON.stringify(userAuth.authorities));
   }
 
   static clear(): void {

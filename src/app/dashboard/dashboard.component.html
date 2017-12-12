@@ -22,7 +22,7 @@
         </table>
         <select (change)="onEventStatsPeriodChange($event.target.value)" class="select2">
           <option value="this_month">This Month</option>
-          <option value="last_month">Last Month</option>
+          <option value="last_month" selected>Last Month</option>
           <option value="this_year">This Year</option>
           <option value="last_year">Last Year</option>
           <option value="all_time">All Time</option>
@@ -188,7 +188,7 @@
             </td>
             <td align="center">{{e.type.toLowerCase().split('_').join(' ')}}</td>
           </tr>
-        
+
         </table>
       </div><!--.box-typical-body-->
     </section><!--.box-typical-dashboard-->

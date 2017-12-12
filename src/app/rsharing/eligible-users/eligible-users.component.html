@@ -54,10 +54,12 @@
           </td>
           <td>
             <button *ngIf="!showPay" (click)="toggleSelectedForPaymenet(u.id)" class="btn btn-primary">Pay</button>
-            <form *ngIf="showPay && payUserId===u.id" #payUserForm="ngForm" (ngSubmit)="payUser(payUserForm.value)" class="form form-inline">
+            <form *ngIf="showPay && payUserId===u.id" #payUserForm="ngForm" (ngSubmit)="payUser(payUserForm.value)" class="form form-inline" novalidate>
               <input [(ngModel)]="payAmount" required class="form-control" type="number" name="payAmount" placeholder="Amount"/>
+              <span *ngIf="payUserForm.controls?.payAmount?.touched && payUserForm.controls?.payAmount?.value<500" class="text text-danger"><br/>Amount should be at least 500</span>
               <input [(ngModel)]="trnxId" required class="form-control" type="text" name="trnxId" placeholder="TrnxId"/>
-              <button type="submit" class="btn btn-success">Confirm</button>
+              <span *ngIf="payUserForm.controls?.trnxId?.touched && payUserForm.controls?.trnxId?.invalid" class="text text-danger"><br/>Required!<br/></span>
+              <button [disabled]="payUserForm.invalid || payUserForm.controls?.payAmount?.value<500" type="submit" class="btn btn-success">Confirm</button>
               <button (click)="toggleSelectedForPaymenet(u.id)" class="btn btn-warning">Cancel</button>
             </form>
           </td>
@@ -143,26 +145,16 @@
           </td>
 
         </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-            <button [disabled]="alreadyPaidUsersPage?.first" (click)="loadApPreviousPage()" class="btn btn-primary">
-              Previous
-            </button>
-            &nbsp;&nbsp;<button [disabled]="alreadyPaidUsersPage?.last" (click)="loadApNextPage()"
-                                class="btn btn-primary">Next
-          </button>
-          </th>
-        </tr>
         </tbody>
       </table>
+      <div class="pagination pull-right" style="margin-right: 20px;">
+        <button [disabled]="alreadyPaidUsersPage?.first" (click)="loadApPreviousPage()" class="btn btn-primary">
+          Previous
+        </button>
+        &nbsp;&nbsp;<button [disabled]="alreadyPaidUsersPage?.last" (click)="loadApNextPage()"
+                            class="btn btn-primary">Next
+      </button>
+      </div>
     </div>
   </div><!--.box-typical-body-->
 </section><!--.box-typical-->

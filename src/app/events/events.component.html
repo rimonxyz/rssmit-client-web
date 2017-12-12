@@ -53,21 +53,12 @@
             {{getReadableDate(e.lastUpdated)}}
           </td>
         </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-            <button [disabled]="eventsPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
-            &nbsp;&nbsp;<button [disabled]="eventsPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next</button>
-          </th>
-        </tr>
         </tbody>
       </table>
+      <div class="pagination pull-right" style="margin-right: 20px;">
+        <button [disabled]="eventsPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
+        &nbsp;&nbsp;<button [disabled]="eventsPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next</button>
+      </div>
     </div>
   </div><!--.box-typical-body-->
 </section><!--.box-typical-->

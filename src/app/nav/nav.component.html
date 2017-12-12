@@ -44,6 +44,12 @@
         <span class="lbl">Revenue Sharing</span>
       </a>
     </li>
+    <li class="red" *ngIf="isLoggedInUserAmin()">
+      <a [routerLink]="['/rshare/requests']">
+        <i class="font-icon font-icon-dashboard"></i>
+        <span class="lbl">Sharing Requests</span>
+      </a>
+    </li>
     <li class="red">
       <a [routerLink]="['/rshare/payments/requests']">
         <i class="font-icon font-icon-dashboard"></i>

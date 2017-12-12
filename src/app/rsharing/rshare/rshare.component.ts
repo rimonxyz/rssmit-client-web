@@ -86,4 +86,8 @@ export class RShareComponent implements OnInit {
   isInvalidDate(): boolean {
     return DateUtil.isInValidDateForSharing(this.month, +this.year);
   }
+
+  onPaymentInfoClick(rShareId: Number) {
+    alert("Please pay the charge using rocket at \n017102261633\n and send a text message containing \n'ShareId: " + rShareId + "' and 'TrnxId: Your trnx id'");
+  }
 }
