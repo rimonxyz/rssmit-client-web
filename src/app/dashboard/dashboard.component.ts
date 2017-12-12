@@ -3,7 +3,10 @@ import {Auth} from "../shared/services/auth.service";
 import {ToastrService} from "../shared/services/toastr.service";
 import {EventStats} from "../shared/model/event_stats.model";
 import {EventService} from "../shared/services/event.service";
-import { EventPage } from '../shared/model/event-page.model';
+import {EventPage} from '../shared/model/event-page.model';
+import {TransactionService} from "../shared/services/transaction.service";
+import {TransactionPage} from "../shared/model/transaction-page.model";
+import {DateUtil} from "../shared/utils/date.util";
 
 @Component({
   selector: 'app-dashboard',
@@ -20,8 +23,12 @@ export class DashboardComponent implements OnInit {
   period: string;
 
   eventsPage: EventPage = new EventPage();
+  trnxPage: TransactionPage = new TransactionPage;
 
-  constructor(private eventService: EventService, private toastr: ToastrService, private auth: Auth) {
+  constructor(private eventService: EventService,
+              private trnxService: TransactionService,
+              private toastr: ToastrService,
+              private auth: Auth) {
   }
 
   ngOnInit() {
@@ -30,11 +37,12 @@ export class DashboardComponent implements OnInit {
 
     // get event statistics
     this.loadEventStats();
-    this.loadEventPage(0);  
+    this.loadEventPage(0);
+    this.loadTransactionPage(0);
   }
 
   loadEventStats():void {
-    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.refreshToken());    
+    this.eventService.getEventStats(this.period).subscribe((e: EventStats) => this.eventStats = e, err => this.auth.refreshToken());
   }
 
   loadEventPage(page: number) {
@@ -42,6 +50,10 @@ export class DashboardComponent implements OnInit {
       this.eventsPage = eventsPage
       console.log(this.eventsPage);
     }, err => this.auth.refreshToken());
+  }
+
+  loadTransactionPage(page: number) {
+    this.trnxService.getAllTransactionsForClient(page).subscribe((tPage: TransactionPage) => this.trnxPage = tPage, err => console.log(err));
   }
 
   onEventStatsPeriodChange(period: string): void{
@@ -75,6 +87,12 @@ export class DashboardComponent implements OnInit {
 
     this.toastr.success('Success!', 'Item Copied!');
   }
+  getReadableDate(date: Date): string {
+    return DateUtil.formatReadableDate(date);
+  }
 
+  getReadableDateTime(date: Date): string {
+    return DateUtil.formatReadableDateTime(date);
+  }
 
 }

@@ -199,53 +199,33 @@
         <h3 class="panel-title">Latest Transactions</h3>
       </header>
       <div class="box-typical-body panel-body">
-        <table class="tbl-typical">
+        <table class="table table-hover">
+          <tbody>
           <tr>
-            <th>
-              <div>Status</div>
-            </th>
-            <th>
-              <div>Subject</div>
-            </th>
-            <th align="center">
-              <div>Department</div>
-            </th>
-            <th align="center">
-              <div>Date</div>
-            </th>
+            <th>Payment Date</th>
+            <th>Reference</th>
+            <th></th>
           </tr>
-          <tr>
+          <tr *ngFor="let t of trnxPage?.content">
+            <td>{{getReadableDate(t.fromDate)}} - {{getReadableDate(t.toDate)}}</td>
             <td>
-              <span class="label label-success">Open</span>
+              <div class="font-11 color-blue-grey-lighter uppercase">Debit</div>
+              ৳{{t.debit}}
             </td>
-            <td>Website down for one week</td>
-            <td align="center">Support</td>
-            <td nowrap align="center"><span class="semibold">Today</span> 8:30</td>
-          </tr>
-          <tr>
             <td>
-              <span class="label label-success">Open</span>
+              <div class="font-11 color-blue-grey-lighter uppercase">Credit</div>
+              ৳{{t.credit}}
             </td>
-            <td>Restoring default settings</td>
-            <td align="center">Support</td>
-            <td nowrap align="center"><span class="semibold">Today</span> 16:30</td>
-          </tr>
-          <tr>
             <td>
-              <span class="label label-warning">Progress</span>
+              <div class="font-11 color-blue-grey-lighter uppercase">Current Balance</div>
+              ৳{{t.balance}}
             </td>
-            <td>Loosing control on server</td>
-            <td align="center">Support</td>
-            <td nowrap align="center"><span class="semibold">Yesterday</span></td>
-          </tr>
-          <tr>
             <td>
-              <span class="label label-danger">Closed</span>
+              <div class="font-11 color-blue-grey-lighter uppercase">Type</div>
+              <span [ngClass]="t.payment? 'text-success':'text-primary'">{{t.payment? 'Payment':'Debited'}}</span>
             </td>
-            <td>Authorizations keys</td>
-            <td align="center">Support</td>
-            <td nowrap align="center">23th May</td>
           </tr>
+          </tbody>
         </table>
       </div><!--.box-typical-body-->
     </section><!--.box-typical-dashboard-->
