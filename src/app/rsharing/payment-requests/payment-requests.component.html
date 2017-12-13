@@ -2,7 +2,7 @@
   <header class="box-typical-header">
     <div class="tbl-row">
       <div class="tbl-cell tbl-cell-title">
-        <h3><a href="/events">Payment Requests</a><br/>
+        <h3><a [routerLink]="['/rshare/payments/requests']">Payment Requests</a><br/>
           ( Total: <span>{{unpaidPrPage?.totalElements}} users</span> ,
           Showing {{unpaidPrPage?.size}} users/page,
           Page: <span>{{upPage+1}}</span> )
@@ -90,7 +90,7 @@
   <header class="box-typical-header">
     <div class="tbl-row">
       <div class="tbl-cell tbl-cell-title">
-        <h3><a href="/events">Resolved Requests</a><br/>
+        <h3><a [routerLink]="['/rshare/payments/requests']">Resolved Requests</a><br/>
           ( Total: <span>{{paidPrPage?.totalElements}} users</span> ,
           Showing {{paidPrPage?.size}} users/page,
           Page: <span>{{pPage+1}}</span> )

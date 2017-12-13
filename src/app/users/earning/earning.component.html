@@ -3,7 +3,7 @@
     <div class="col-lg-3">
       <div class="form-group">
         <label class="form-label semibold">Month:</label>
-        <div class="form-control-wrapper form-control-icon-left">
+        <div class="form-control-wrapper">
           <select name="month" class="form-control" (change)="onMonthInputChange($event.target.value)">
             <option [selected]="month==='january'" value="january">January</option>
             <option [selected]="month==='february'" value="february">February</option>
@@ -19,14 +19,14 @@
             <option [selected]="month==='december'" value="december">December</option>
           </select>
           <!--<input [(ngModel)]="fromDate" name="fromDate" type="date" class="form-control" placeholder="Left"/>-->
-          <i class="fa fa-calendar"></i>
+          <!--<i class="fa fa-calendar"></i>-->
         </div>
       </div>
     </div>
     <div class="col-lg-3">
       <div class="form-group">
         <label class="form-label semibold">Year:</label>
-        <div class="form-control-wrapper form-control-icon-left">
+        <div class="form-control-wrapper">
           <select name="year" class="form-control" (change)="onYearInputChange($event.target.value)">
             <option value="2017">2017</option>
             <option value="2018">2018</option>
@@ -39,7 +39,7 @@
             <option value="2025">2025</option>
           </select>
           <!--<input [(ngModel)]="toDate" name="toDate" type="date" class="form-control" placeholder="Left"/>-->
-          <i class="fa fa-calendar"></i>
+          <!--<i class="fa fa-calendar"></i>-->
         </div>
       </div>
     </div>

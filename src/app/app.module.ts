@@ -25,6 +25,7 @@ import {EventsComponent} from './events/events.component';
 import {EventService} from "./shared/services/event.service";
 import {RsharingService} from "./shared/services/rsharing.service";
 import {TransactionService} from "./shared/services/transaction.service";
+import {StatisticsService} from "./shared/services/stats.service";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {TransactionService} from "./shared/services/transaction.service";
     ToastrService,
     EventService,
     RsharingService,
-    TransactionService
+    TransactionService,
+    StatisticsService
   ],
   bootstrap: [AppComponent]
 })

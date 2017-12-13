@@ -6,5 +6,6 @@ export class UserAuth{
   refresh_token: string;
   expires_in: number;
   scope:string;
+  username: string;
   authorities: Authority[];
 }

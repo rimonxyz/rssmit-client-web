@@ -75,6 +75,10 @@ export class Auth implements CanActivate{
       .length > 0;
   }
 
+  getUsername():string{
+    return <string>LocalStorage.retrive(LocalStorage.KEYS.username);
+  }
+
   getAccessToken(): string{
     return <string>LocalStorage.retrive(LocalStorage.KEYS.accessToken);
   }

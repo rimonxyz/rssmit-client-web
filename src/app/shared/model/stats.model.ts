@@ -1,5 +1,9 @@
-export class EventStats {
-  totalEvents: number;
+export class Statistics {
+  numberOfEvents: number;
   weightSum: number;
-  actualWeightSum: number;
+  totalUsers: number;
+  totalSharedAmount: number;
+  totalLiability: number;
+  totalNumberOfTrnx: number;
+  totalPaymentRequests: number;
 }
