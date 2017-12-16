@@ -125,7 +125,7 @@
         <tbody>
         <tr>
           <th></th>
-          <th>ID</th>
+          <th>SMRID</th>
           <th>Date Range</th>
           <th>Revenue</th>
           <th>Share(%)</th>
@@ -163,8 +163,8 @@
           </td>
           <td *ngIf="!rsp.active">
             <div class="font-11 color-blue-grey-lighter uppercase">Status</div>
-            <span class="text text-danger">Inactive</span>
-            <span class="text text-info" (click)="onPaymentInfoClick(rsp.id)"><br/>Click Here to see payment details</span>
+            <span class="text text-danger">Payment Pending..</span>
+            <span class="text text-info" data-toggle="modal" data-target="#paymentInfoModal"><br/>Click Here to see payment details</span>
           </td>
           <td>
             <button *ngIf="rsp.active" [routerLink]="[rsp.id,'eUsers']" class="btn btn-primary">Eligible Users</button>
@@ -181,3 +181,40 @@
     </div>
   </div><!--.box-typical-body-->
 </section><!--.box-typical-->
+
+
+
+
+
+<div id="paymentInfoModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Payment Instructions</h4>
+      </div>
+      <div class="modal-body">
+        Currently we aren't accepting any payment gateway (We are Currently working) but you can pay throught some very popular mobile payment services.
+        Just send your charge amount to our Rocket number and send us an sms to let us know you've paid for the latest sharing entity.
+        <hr/>
+        SMS Format:<br/>
+        Just put your SMRID (on the left of table), amount and trnxId.<br/><br/>
+        Example:<br/>
+        SMR ID: 31<br/>
+        Amount: chargeAmount<br/>
+        TrnxId: yorTrnxId
+        <hr/>
+        Pay to:<br/>
+        Rocket account:<br/>
+        017102261633 (Send Money)
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
