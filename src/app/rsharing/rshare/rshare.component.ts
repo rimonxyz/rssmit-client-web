@@ -21,6 +21,8 @@ export class RShareComponent implements OnInit {
   month: string;
   year: string;
 
+  invalidDate: boolean;
+
   constructor(private rsharingService: RsharingService,
               private toastr: ToastrService,
               private auth: Auth) {
@@ -52,7 +54,7 @@ export class RShareComponent implements OnInit {
   fetchRSharedPage() {
     this.rsharingService.getRSharedListPaginated(this.page).subscribe((rsp: RSharedPage) => {
       this.rSharedPage = rsp;
-      console.log(this.rSharedPage);
+      // console.log(this.rSharedPage);
     }, err => {
       this.auth.refreshToken();
     });
@@ -76,7 +78,9 @@ export class RShareComponent implements OnInit {
   }
 
   onMonthInputChange() {
-    this.year = DateUtil.getLastMonthYear(this.month) + "";
+    this.invalidDate = this.isInvalidDate();
+    console.log("IsInvalid:" +this.invalidDate);    
+    // this.year = DateUtil.getLastMonthYear(this.month) + "";
   }
 
   onYearInputChange(year: string) {

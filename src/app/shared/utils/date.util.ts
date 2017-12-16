@@ -39,22 +39,26 @@ export class DateUtil {
       if (m.toLowerCase() === month.toLowerCase())
         mNumber = i + 1;
     });
-    let date: Date = new Date();
-    date.setFullYear(year, mNumber - 1, 15);
-    return date >= new Date();
+    const date: Date = new Date();
+    date.setFullYear(year, mNumber, 0);
+
+    const currentDate: Date = new Date();
+    console.log("CurrentDate: "+currentDate);
+    console.log("Selected : "+date);
+    return date.getTime() >= currentDate.getTime();
   }
 
   public static getLastMonthString(date: Date): string {
-    let currentMonth: string = "";
+    let lastMonth: string = "December";
     DateUtil.monthNames.forEach((m, i) => {
       if ((i + 1) === date.getMonth())
-        currentMonth = m;
+        lastMonth = m;
     })
-    return currentMonth;
+    return lastMonth;
   }
 
   static getLastMonthYear(month: string): number {
-    if (month ==='january')
+    if (month ==='december')
       return new Date().getFullYear() - 1;
     return new Date().getFullYear();
   }

@@ -66,7 +66,7 @@
             <!--<input [(ngModel)]="fromDate" name="fromDate" type="date" class="form-control" placeholder="Left"/>-->
             <!--<i class="fa fa-calendar"></i>-->
           </div>
-          <em *ngIf="isInvalidDate()">You can only share revenues for last month or earlier!</em>
+          <em *ngIf="invalidDate">You can only share revenues for last month or earlier!</em>
         </div>
       </div>
       <div class="col-lg-3">
