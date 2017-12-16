@@ -62,7 +62,7 @@ export class Auth implements CanActivate{
     userAuth.subscribe((userAuth: UserAuth)=>{
       LocalStorage.putAuth(userAuth);
       this.router.navigate(['/'])
-      this.toastr.success("Refresh Token","Token has been refreshed!");
+      // this.toastr.success("Refresh Token","Token has been refreshed!");
     },err=>this.logout());
   }
 
