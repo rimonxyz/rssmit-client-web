@@ -3,9 +3,9 @@
         <div class="container-fluid">
             <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" class="sign-box col-sm-4 sign-in-box">
                 <div class="sign-avatar">
-                    <img src="img/avatar-sign.png" alt="">
+                    <!--<img src="assets/img/smr-logo.png" alt="">-->
                 </div>
-                <header class="sign-title">Sign In</header>
+                <h2 class="sign-title text text-primary">Sign In</h2>
                 <div class="form-group">
                     <input [(ngModel)]="username" name="username" type="text" class="form-control" placeholder="Username or E-Mail"/>
                 </div>

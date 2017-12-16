@@ -3,6 +3,7 @@ import {Auth} from '../shared/services/auth.service';
 import {UserService} from "../shared/services/user.service";
 import {ToastrService} from "../shared/services/toastr.service";
 import {Router} from "@angular/router";
+import {Commons} from "../shared/utils/commons.util";
 
 declare let jQuery: any;
 @Component({
@@ -20,17 +21,28 @@ export class LoginComponent implements OnInit {
 
   token: string;
 
-  constructor(private auth: Auth, private userService: UserService, private toastr: ToastrService, private router: Router) {
+  constructor(private auth: Auth,
+              private userService: UserService,
+              private toastr: ToastrService,
+              private router: Router) {
   }
 
   ngOnInit() {
+    if (this.auth.isLoggedIn())
+      this.router.navigate(['/dashboard']);
 
+    let verify = Commons.getUrlParam('verify', window.location);
+    if (verify == null || verify === '') return;
+    if (verify == 'true') this.toastr.success("Verified!", "Please login to continue.");
+    else this.toastr.error("Failed!", "Could not verify!");
   }
 
   login(formValues: any){
     this.auth.login(formValues.username,formValues.password)
   }
 
+
+  // PASSWORD RESET
   onResetPassword(formValues) {
     this.userService.sendVerificationEmail(formValues.email).subscribe(result => {
       this.emailSent = true;
@@ -60,4 +72,5 @@ export class LoginComponent implements OnInit {
   matchPassword(formValues) {
     this.passwordMatches = formValues.password.length >= 6 && formValues.password === formValues.confirmPassword;
   }
+
 }

@@ -3,12 +3,12 @@ import {UserAuth} from '../model/user_auth.model';
 export class LocalStorage{
 
   public static KEYS: any = {
-        clientId : "client_id",
-        clientSecret: "client_secret",
-        accessToken: "access_token",
-    refreshToken: "refresh_token",
-    authorities: "refresh_token",
-    username: "username"
+    clientId: "*&^%&%G765bibi^87i5",
+    clientSecret: "V%$#564Vu56%786v*7i6",
+    accessToken: "B57UB5&i6u765&5b&*6",
+    refreshToken: "INB*5B&U4^345%36^5u",
+    authorities: "BU&46^&v3$76u%^&*",
+    username: "B^4^3&463b8575it"
   }
 
   constructor() {

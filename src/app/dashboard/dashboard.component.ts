@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
   loadEventPage(page: number) {
     this.eventService.getEvents(0).subscribe(eventsPage => {
       this.eventsPage = eventsPage
-    }, err => this.auth.refreshToken());
+    }, err => console.log(err));
   }
 
   loadTransactionPage(page: number) {
