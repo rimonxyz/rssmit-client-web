@@ -57,9 +57,10 @@
 
         <form class="form" #cfResetForm="ngForm" (ngSubmit)="onTokenVerified(cfResetForm.value)" *ngIf="tokenVerified">
           <input [(ngModel)]="password" class="form-control" type="password" name="password" required placeholder="New Password"/>
-          <input [(ngModel)]="confirmPassword" class="form-control" type="password" name="confirmPassword" required placeholder="Confirm Password"/>
-          <em *ngIf="!passwordMatches">Password doesn't match or too short!!</em>
-          <button type="submit" class="btn btn-primary-outline">Submit</button>
+          <input [(ngModel)]="confirmPassword" (keyup)="matchPassword(cfResetForm.value)" class="form-control" type="password" name="confirmPassword" required placeholder="Confirm Password"/>
+          <em *ngIf="cfResetForm.controls.password?.touched && !passwordMatches">Password doesn't match or too
+            short!!<br/></em>
+          <button [disabled]="!passwordMatches" type="submit" class="btn btn-primary-outline">Submit</button>
         </form>
 
       </div>

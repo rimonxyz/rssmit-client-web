@@ -45,16 +45,20 @@ export class UserService {
     return this.http.post(this.getEmailValidationUrl(email), null).map((r: Response) => r).catch(this.handleError);
   }
 
-  verifyToken(token: string): Observable<Response> {
-    return this.http.post(this.getTokenVerificationUrl(token), null).map((r: Response) => r).catch(this.handleError);
+  verifyToken(token: string): Observable<string> {
+    return this.http.post(this.getTokenVerificationUrl(token), null).map((r: Response) => {
+      let res: string = r.text();
+      console.log(res);
+      return res;
+    }).catch(this.handleError);
   }
 
-  resetPassword(password: string){
-    return this.http.post(this.getPasswordResetUrl(password),null).map((r: Response) => r).catch(this.handleError);
+  resetPassword(token: string, password: string) {
+    return this.http.post(this.getPasswordResetUrl(token, password), null).map((r: Response) => r).catch(this.handleError);
   }
 
-  getPasswordResetUrl(password: string) {
-    return ApiEndpoints.BASE_URL + "/resetPassword?password=" + password;
+  getPasswordResetUrl(token: string, password: string) {
+    return ApiEndpoints.BASE_URL + "/resetPassword?token=" + token + "&password=" + password;
   }
 
   getTokenVerificationUrl(token: string) {

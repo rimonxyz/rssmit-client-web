@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   tokenVerified: boolean;
   passwordMatches: boolean;
 
+  token: string;
+
   constructor(private auth: Auth, private userService: UserService, private toastr: ToastrService, private router: Router) {
   }
 
@@ -37,17 +39,25 @@ export class LoginComponent implements OnInit {
   }
 
   onTokenEntered(formValues) {
-    this.userService.verifyToken(formValues.token).subscribe(result => this.tokenVerified = true, err => console.log(err));
+    this.userService.verifyToken(formValues.token).subscribe(result => {
+      this.tokenVerified = true;
+      this.token = result;
+      console.log("TokenVerified:" + result);
+    }, err => console.log("error" + err.code));
   }
 
   onTokenVerified(formValues) {
     console.log(formValues)
     this.passwordMatches = formValues.password.length >= 6 && formValues.password === formValues.confirmPassword;
     if (!this.passwordMatches) return;
-    this.userService.resetPassword(formValues.password).subscribe(result => {
+    this.userService.resetPassword(this.token, formValues.password).subscribe(result => {
       jQuery("#confirmEmailModal").modal("hide");
       this.toastr.success("Success!", "Password reset successful!");
       this.router.navigate(['/login']);
     });
+  }
+
+  matchPassword(formValues) {
+    this.passwordMatches = formValues.password.length >= 6 && formValues.password === formValues.confirmPassword;
   }
 }
