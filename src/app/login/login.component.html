@@ -18,7 +18,7 @@
                         <label for="signed-in">Keep me signed in</label>
                     </div>
                     <div class="float-right reset">
-                        <a href="reset-password.html">Reset Password</a>
+                        <a data-toggle="modal" data-target="#confirmEmailModal">Reset Password</a>
                     </div>
                 </div><br/>
                 <button type="submit" class="btn btn-rounded pull-right">Sign in</button>
@@ -30,3 +30,45 @@
         </div>
     </div>
 </div><!--.page-center-->
+
+
+<!-- Verification email modal -->
+<div id="confirmEmailModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" *ngIf="!emailSent && !tokenVerified">Your Email Address</h4>
+        <h4 class="modal-title" *ngIf="emailSent && !tokenVerified">A confirmation token has been sent to your email address. Please enter it here.</h4>
+        <h4 class="modal-title" *ngIf="tokenVerified">New Password</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form" #cfEmailForm="ngForm" (ngSubmit)="onResetPassword(cfEmailForm.value)" *ngIf="!emailSent && !tokenVerified">
+          <input [(ngModel)]="email" class="form-control" type="email" name="email" required placeholder="Your email address" email/>
+          <button [disabled]="cfEmailForm.invalid" type="submit" class="btn btn-primary-outline">Submit</button>
+        </form>
+
+        <form class="form" #cfTokenForm="ngForm" (ngSubmit)="onTokenEntered(cfTokenForm.value)" *ngIf="emailSent && !tokenVerified">
+          <input [(ngModel)]="token" class="form-control" type="text" name="token" required placeholder="Enter verification token"/>
+          <button [disabled]="cfTokenForm.invalid" type="submit" class="btn btn-primary-outline">Submit</button>
+        </form>
+
+        <form class="form" #cfResetForm="ngForm" (ngSubmit)="onTokenVerified(cfResetForm.value)" *ngIf="tokenVerified">
+          <input [(ngModel)]="password" class="form-control" type="password" name="password" required placeholder="New Password"/>
+          <input [(ngModel)]="confirmPassword" class="form-control" type="password" name="confirmPassword" required placeholder="Confirm Password"/>
+          <em *ngIf="!passwordMatches">Password doesn't match or too short!!</em>
+          <button type="submit" class="btn btn-primary-outline">Submit</button>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
