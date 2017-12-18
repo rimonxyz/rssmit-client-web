@@ -26,6 +26,7 @@ import {EventService} from "./shared/services/event.service";
 import {RsharingService} from "./shared/services/rsharing.service";
 import {TransactionService} from "./shared/services/transaction.service";
 import {StatisticsService} from "./shared/services/stats.service";
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {StatisticsService} from "./shared/services/stats.service";
     LoginComponent,
     SignUpComponent,
     LogoutComponent,
-    EventsComponent
+    EventsComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
