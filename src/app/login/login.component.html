@@ -7,10 +7,12 @@
                 </div>
                 <h2 class="sign-title text text-primary">Sign In</h2>
                 <div class="form-group">
-                    <input [(ngModel)]="username" name="username" type="text" class="form-control" placeholder="Username or E-Mail"/>
+                  <input [(ngModel)]="username" name="username" type="text" class="form-control"
+                         placeholder="Username or E-Mail" required/>
                 </div>
                 <div class="form-group">
-                    <input [(ngModel)]="password" name=password type="password" class="form-control" placeholder="Password"/>
+                  <input [(ngModel)]="password" name=password type="password" class="form-control"
+                         placeholder="Password" required/>
                 </div>
                 <div class="form-group">
                     <div class="checkbox float-left">
@@ -21,7 +23,7 @@
                         <a data-toggle="modal" data-target="#confirmEmailModal">Reset Password</a>
                     </div>
                 </div><br/>
-                <button type="submit" class="btn btn-rounded pull-right">Sign in</button>
+              <button [disabled]="loginForm.invalid" type="submit" class="btn btn-rounded pull-right">Sign in</button>
                 <p class="sign-note">New to our website? <a [routerLink]="['/signup']">Sign up</a></p>
                 <!--<button type="button" class="close">
                     <span aria-hidden="true">&times;</span>
