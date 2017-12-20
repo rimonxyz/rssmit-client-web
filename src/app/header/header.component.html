@@ -19,8 +19,11 @@
             <div class="site-header-content-in">
                 <div class="site-header-shown">
                     <div class="pull-left">
-                      <a *ngIf="!isLoggedIn()" href="/privacy-policy">Privacy Policy</a>
+                      <a *ngIf="!isLoggedIn()" href="//docs.sharemyrevenue.net">Documentations</a>&nbsp;&nbsp;&nbsp;
                     </div>
+                    <div class="pull-left">
+                        <a *ngIf="!isLoggedIn()" href="/privacy-policy">Privacy Policy</a>
+                      </div>
                     <span class="pull-left">{{getUsername()}}</span>
 
                     <div class="dropdown user-menu">

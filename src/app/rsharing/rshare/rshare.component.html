@@ -40,8 +40,8 @@
                    placeholder="in %" required/>
             <i class="fa fa-percent"></i>
           </div>
-          <em *ngIf="shareRevForm.controls.sharePercentage?.invalid && shareRevForm.controls.sharePercentage?.touched">*Required!</em>
-          <em *ngIf="shareRevForm.controls.sharePercentage?.value>100">*Should be less than 100</em>
+          <em *ngIf="shareRevForm.controls.sharePercentage?.invalid && shareRevForm.controls.sharePercentage?.touched">*Required!<br/></em>
+          <em *ngIf="shareRevForm.controls.sharePercentage?.value>100 || shareRevForm.controls.sharePercentage?.value<10">*Should be between 10 t0 100</em>
         </div>
       </div>
 
@@ -97,6 +97,7 @@
             <button type="submit" class="form-control btn btn-primary btn-rounded" placeholder="Left"
                     [disabled]="shareRevForm.invalid
             || shareRevForm.controls.sharePercentage?.value>100
+            || shareRevForm.controls.sharePercentage?.value<10
             || shareRevForm.controls.totalRevenue?.value<5000
             || isInvalidDate()">Share
             </button>

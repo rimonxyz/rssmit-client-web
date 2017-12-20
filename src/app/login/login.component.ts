@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
     if (this.auth.isLoggedIn())
       this.router.navigate(['/dashboard']);
 
+      // account verification message handling
     let verify = Commons.getUrlParam('verify', window.location);
     if (verify == null || verify === '') return;
     if (verify == 'true') this.toastr.success("Verified!", "Please login to continue.");

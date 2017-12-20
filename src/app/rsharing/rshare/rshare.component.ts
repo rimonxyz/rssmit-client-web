@@ -46,7 +46,7 @@ export class RShareComponent implements OnInit {
       this.toastr.success('Success!', 'Successfully created a sharing entity!');
       this.fetchRSharedPage();
     }, err => {
-      this.toastr.warning("We\'re sorry..","We\'re working on it! Please try again in a little while. This time it won\'t happen I promise!");
+      this.toastr.warning("We\'re sorry..","Could not save your sharing, Have you already shared for that month?");
       this.auth.refreshToken();
     });
   }
