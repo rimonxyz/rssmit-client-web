@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   period: string;
 
   eventsPage: EventPage = new EventPage();
-  trnxPage: TransactionPage = new TransactionPage;
+  trnxPage: TransactionPage = new TransactionPage();
 
   constructor(private eventService: EventService,
               private trnxService: TransactionService,
