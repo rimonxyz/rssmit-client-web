@@ -1,0 +1,172 @@
+<header class="section-header">
+  <div class="tbl">
+    <div class="tbl-row">
+      <div class="tbl-cell">
+        <h3>Pending Sharing</h3>
+        <ol class="breadcrumb breadcrumb-simple">
+          <li><a [routerLink]="['/']">App</a></li>
+          <li><a [routerLink]="['/dashboard']">Dashboard</a></li>
+          <li class="active">Pending Sharing</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="box-typical">
+  <header class="box-typical-header">
+    <div class="tbl-row">
+      <div class="tbl-cell tbl-cell-title">
+        <h3><a [routerLink]="['/rsharing/requests']">Pending Sharing</a><br/>
+          <!--( Total: <span>{{eventsPage?.totalElements}} events</span> ,-->
+          <!--Showing {{eventsPage?.size}} events/page,-->
+          <!--Page: <span>{{page+1}}</span> )-->
+        </h3>
+      </div>
+    </div>
+  </header>
+  <div class="box-typical-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+        <tr>
+          <th></th>
+          <th>ID</th>
+          <th>Date Range</th>
+          <th>Revenue</th>
+          <th>Share(%)</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let rsp of inActiveRSharedPage?.content">
+          <td class="table-check">
+            <div class="checkbox checkbox-only">
+              <input type="checkbox" id="tbl-check-1"/>
+              <label for="tbl-check-1"></label>
+            </div>
+          </td>
+          <td><a>{{rsp.id}}</a></td>
+          <td>{{getReadableDate(rsp.fromDate)}} - {{getReadableDate(rsp.toDate)}}</td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">REVENUE</div>
+            ৳{{rsp.revenueAmount}}
+          </td>
+          <td width="150">
+            <div class="progress-with-amount">
+              <progress class="progress progress-success progress-no-margin" [value]="rsp.sharePercentage" max="100">
+                25%
+              </progress>
+              <div class="progress-with-amount-number">{{rsp.sharePercentage}}%</div>
+            </div>
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Amount</div>
+            ৳{{rsp.sharedAmount}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Company Charge</div>
+            ৳{{rsp.companyCharge}}
+          </td>
+          <td>
+            <button (click)="activateSharedEntity(rsp.id)" class="btn btn-primary">Activate</button>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>
+            <button [disabled]="inActiveRSharedPage?.first" (click)="loadInActivePreviousPage()" class="btn btn-primary">Previous
+            </button>
+            &nbsp;&nbsp;<button [disabled]="inActiveRSharedPage?.last" (click)="loadInActiveNextPage()" class="btn btn-primary">Next
+          </button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!--.box-typical-body-->
+</section><!--.box-typical-->
+
+<section class="box-typical">
+  <header class="box-typical-header">
+    <div class="tbl-row">
+      <div class="tbl-cell tbl-cell-title">
+        <h3><a [routerLink]="['/rsharing/requests']">Already Confirmed Sharing</a><br/>
+          <!--( Total: <span>{{eventsPage?.totalElements}} events</span> ,-->
+          <!--Showing {{eventsPage?.size}} events/page,-->
+          <!--Page: <span>{{page+1}}</span> )-->
+        </h3>
+      </div>
+    </div>
+  </header>
+  <div class="box-typical-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+        <tr>
+          <th></th>
+          <th>ID</th>
+          <th>Date Range</th>
+          <th>Revenue</th>
+          <th>Share(%)</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let rsp of activeRSharedPage?.content">
+          <td class="table-check">
+            <div class="checkbox checkbox-only">
+              <input type="checkbox" id="tbl-check-1"/>
+              <label for="tbl-check-1"></label>
+            </div>
+          </td>
+          <td><a>{{rsp.id}}</a></td>
+          <td>{{getReadableDate(rsp.fromDate)}} - {{getReadableDate(rsp.toDate)}}</td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">REVENUE</div>
+            ৳{{rsp.revenueAmount}}
+          </td>
+          <td width="150">
+            <div class="progress-with-amount">
+              <progress class="progress progress-success progress-no-margin" [value]="rsp.sharePercentage" max="100">
+                25%
+              </progress>
+              <div class="progress-with-amount-number">{{rsp.sharePercentage}}%</div>
+            </div>
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Amount</div>
+            ৳{{rsp.sharedAmount}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Company Charge</div>
+            ৳{{rsp.companyCharge}}
+          </td>
+          <td>
+            <span class="text text-success">Activated</span>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>
+            <button [disabled]="activeRSharedPage?.first" (click)="loadActivePreviousPage()" class="btn btn-primary">Previous
+            </button>
+            &nbsp;&nbsp;<button [disabled]="activeRSharedPage?.last" (click)="loadActiveNextPage()" class="btn btn-primary">Next
+          </button>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!--.box-typical-body-->
+</section><!--.box-typical-->

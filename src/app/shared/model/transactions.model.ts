@@ -10,4 +10,5 @@ export class Transaction {
   fromDate: Date;
   toDate: Date;
   payment: boolean;
+  trnxId: string;
 }

@@ -1,74 +1,49 @@
+
 <div class="row">
   <div class="col-xl-6">
-    <div class="chart-statistic-box">
-      <div class="chart-txt">
-        <div class="chart-txt-top">
-          <p><span class="unit">$</span><span class="number">1540</span></p>
-          <p class="caption">Week income</p>
-        </div>
-        <table class="tbl-data">
-          <tr>
-            <td class="price color-purple">{{eventStats.totalEvents}}</td>
-            <td>Total Events</td>
-          </tr>
-          <tr>
-            <td class="price color-yellow">{{eventStats.actualWeightSum}}</td>
-            <td>Total Interaction<br/>Points</td>
-          </tr>
-          <tr>
-            <td class="price color-lime">{{eventStats.weightSum}}</td>
-            <td>Total Interaction<br/>Points earned by <br/>Users</td>
-          </tr>
-        </table>
-        <select (change)="onEventStatsPeriodChange($event.target.value)" class="select2">
-          <option value="this_month">This Month</option>
-          <option value="last_month">Last Month</option>
-          <option value="this_year">This Year</option>
-          <option value="last_year">Last Year</option>
-          <option value="all_time">All Time</option>
-        </select>
+    <section class="widget widget-tabs-compact">
+      <div class="widget-tabs-nav colored">
+        <ul class="tbl-row" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link blue" data-toggle="tab" href="#w-4-tab-2" role="tab">
+              <i class="font-icon font-icon-zigzag"></i>
+              {{stats.totalSharedAmount}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link orange active" data-toggle="tab" href="#w-4-tab-1" role="tab">
+              <i class="font-icon font-icon-minus"></i>
+              {{stats.totalLiability}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link green active" data-toggle="tab" href="#w-4-tab-1" role="tab">
+              <i class="font-icon font-icon-check-circle"></i>
+              {{stats.totalSharedAmount-stats.totalLiability}}
+            </a>
+          </li>
+        </ul>
       </div>
-      <div class="chart-container">
-        <div class="chart-container-in">
-          <div id="chart_div"></div>
-          <header class="chart-container-title">Income</header>
-          <div class="chart-container-x">
-            <div class="item"></div>
-            <div class="item">tue</div>
-            <div class="item">wed</div>
-            <div class="item">thu</div>
-            <div class="item">fri</div>
-            <div class="item">sat</div>
-            <div class="item">sun</div>
-            <div class="item">mon</div>
-            <div class="item"></div>
-          </div>
-          <div class="chart-container-y">
-            <div class="item">300</div>
-            <div class="item"></div>
-            <div class="item">250</div>
-            <div class="item"></div>
-            <div class="item">200</div>
-            <div class="item"></div>
-            <div class="item">150</div>
-            <div class="item"></div>
-            <div class="item">100</div>
-            <div class="item"></div>
-            <div class="item">50</div>
-            <div class="item"></div>
-          </div>
-        </div>
-      </div>
-    </div><!--.chart-statistic-box-->
-  </div><!--.col-->
+      <div id="pi_chart_div"></div>
+    </section>
+
+  </div>
   <div class="col-xl-6">
+    <select (change)="onEventStatsPeriodChange($event.target.value)" class="form-control">
+      <option value="this_month" selected>Select Period</option>
+      <option value="this_month">This Month</option>
+      <option value="last_month">Last Month</option>
+      <option value="this_year">This Year</option>
+      <option value="last_year">Last Year</option>
+      <option value="all_time">All Time</option>
+    </select><hr/>
     <div class="row">
       <div class="col-sm-6">
         <article class="statistic-box red">
           <div>
-            <div class="number">26</div>
+            <div class="number">{{stats.numberOfEvents}}</div>
             <div class="caption">
-              <div>Open tickets</div>
+              <div>Total Events</div>
             </div>
             <div class="percent">
               <div class="arrow up"></div>
@@ -80,9 +55,9 @@
       <div class="col-sm-6">
         <article class="statistic-box purple">
           <div>
-            <div class="number">12</div>
+            <div class="number">{{stats.weightSum}}</div>
             <div class="caption">
-              <div>Closes tickets</div>
+              <div>Interaction Points</div>
             </div>
             <div class="percent">
               <div class="arrow down"></div>
@@ -94,9 +69,9 @@
       <div class="col-sm-6">
         <article class="statistic-box yellow">
           <div>
-            <div class="number">104</div>
+            <div class="number">{{stats.totalUsers}}</div>
             <div class="caption">
-              <div>New clients</div>
+              <div>Total Users</div>
             </div>
             <div class="percent">
               <div class="arrow down"></div>
@@ -108,9 +83,9 @@
       <div class="col-sm-6">
         <article class="statistic-box green">
           <div>
-            <div class="number">29</div>
+            <div class="number">{{stats.totalNumberOfTrnx}}</div>
             <div class="caption">
-              <div>Here is an example of a long name</div>
+              <div>Total Transactions</div>
             </div>
             <div class="percent">
               <div class="arrow up"></div>
@@ -162,10 +137,14 @@
 </div><!--.row-->
 
 <div class="row">
-  <div class="col-xl-6 dahsboard-column">
+  <div class="col-sm-6">
     <section class="box-typical box-typical-dashboard panel panel-default scrollable">
-      <header class="box-typical-header panel-heading">
-        <h3 class="panel-title">Latest Interactions</h3>
+      <header class="box-typical-header">
+        <div class="tbl-row">
+          <div class="tbl-cell tbl-cell-title">
+            <h3><a [routerLink]="['/events']"> Latest Interactions </a><br/></h3>
+          </div>
+        </div>
       </header>
       <div class="box-typical-body panel-body">
         <table class="tbl-typical">
@@ -188,64 +167,48 @@
             </td>
             <td align="center">{{e.type.toLowerCase().split('_').join(' ')}}</td>
           </tr>
-        
+
         </table>
       </div><!--.box-typical-body-->
     </section><!--.box-typical-dashboard-->
   </div><!--.col-->
-  <div class="col-xl-6 dahsboard-column">
+  <div class="col-sm-6">
     <section class="box-typical box-typical-dashboard panel panel-default scrollable">
-      <header class="box-typical-header panel-heading">
-        <h3 class="panel-title">Latest Transactions</h3>
+      <header class="box-typical-header">
+        <div class="tbl-row">
+          <div class="tbl-cell tbl-cell-title">
+            <h3><a [routerLink]="['/rshare/payments/requests']"> Latest Transactions </a><br/></h3>
+          </div>
+        </div>
       </header>
       <div class="box-typical-body panel-body">
-        <table class="tbl-typical">
+        <table class="table table-hover">
+          <tbody>
           <tr>
-            <th>
-              <div>Status</div>
-            </th>
-            <th>
-              <div>Subject</div>
-            </th>
-            <th align="center">
-              <div>Department</div>
-            </th>
-            <th align="center">
-              <div>Date</div>
-            </th>
+            <th>Payment Date</th>
+            <th>Reference</th>
+            <th></th>
           </tr>
-          <tr>
+          <tr *ngFor="let t of trnxPage?.content">
+            <td>{{getReadableDate(t.fromDate)}} - {{getReadableDate(t.toDate)}}</td>
             <td>
-              <span class="label label-success">Open</span>
+              <div class="font-11 color-blue-grey-lighter uppercase">Debit</div>
+              ৳{{t.debit}}
             </td>
-            <td>Website down for one week</td>
-            <td align="center">Support</td>
-            <td nowrap align="center"><span class="semibold">Today</span> 8:30</td>
-          </tr>
-          <tr>
             <td>
-              <span class="label label-success">Open</span>
+              <div class="font-11 color-blue-grey-lighter uppercase">Credit</div>
+              ৳{{t.credit}}
             </td>
-            <td>Restoring default settings</td>
-            <td align="center">Support</td>
-            <td nowrap align="center"><span class="semibold">Today</span> 16:30</td>
-          </tr>
-          <tr>
             <td>
-              <span class="label label-warning">Progress</span>
+              <div class="font-11 color-blue-grey-lighter uppercase">Current Balance</div>
+              ৳{{t.balance}}
             </td>
-            <td>Loosing control on server</td>
-            <td align="center">Support</td>
-            <td nowrap align="center"><span class="semibold">Yesterday</span></td>
-          </tr>
-          <tr>
             <td>
-              <span class="label label-danger">Closed</span>
+              <div class="font-11 color-blue-grey-lighter uppercase">Type</div>
+              <span [ngClass]="t.payment? 'text-success':'text-primary'">{{t.payment? 'Payment':'Debited'}}</span>
             </td>
-            <td>Authorizations keys</td>
-            <td align="center">Support</td>
-            <td nowrap align="center">23th May</td>
           </tr>
+          </tbody>
         </table>
       </div><!--.box-typical-body-->
     </section><!--.box-typical-dashboard-->

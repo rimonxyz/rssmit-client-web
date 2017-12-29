@@ -2,7 +2,7 @@
   <header class="box-typical-header">
     <div class="tbl-row">
       <div class="tbl-cell tbl-cell-title">
-        <h3><a href="/events">Payment Requests</a><br/>
+        <h3><a [routerLink]="['/rshare/payments/requests']">Payment Requests</a><br/>
           ( Total: <span>{{unpaidPrPage?.totalElements}} users</span> ,
           Showing {{unpaidPrPage?.size}} users/page,
           Page: <span>{{upPage+1}}</span> )
@@ -32,7 +32,7 @@
             </div>
           </td>
           <td>{{pr.user?.name}}</td>
-          <td>{{pr.user.email}}</td>
+          <td>{{pr.user.actualEmail}}</td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Payment Method</div>
             {{pr.paymentMethod}}
@@ -56,31 +56,22 @@
             <button *ngIf="!showPay" (click)="toggleSelectedForPaymenet(pr.user?.id)" class="btn btn-primary">Pay</button>
             <form *ngIf="showPay && payUserId===pr.user.id" #payUserForm="ngForm" (ngSubmit)="payUser(pr.id,payUserForm.value)" class="form form-inline">
               <input [(ngModel)]="payAmount" required class="form-control" type="number" name="payAmount" placeholder="Amount"/>
-              <input [(ngModel)]="trnxId" required class="form-control" type="text" name="trnxId" placeholder="TrnxId"/>
+              <input [(ngModel)]="trnxId" required class="form-control" type="text" name="trnxId" placeholder="TrnxId"/><br/>
               <button type="submit" class="btn btn-success">Confirm</button>
               <button (click)="toggleSelectedForPaymenet(pr.user?.id)" class="btn btn-warning">Cancel</button>
             </form>
           </td>
         </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-            <button [disabled]="unpaidPrPage?.first" (click)="loadUnpaidPreviousPage()" class="btn btn-primary">
-              Previous
-            </button>
-            &nbsp;&nbsp;<button [disabled]="unpaidPrPage?.last" (click)="loadUnpaidNextPage()" class="btn btn-primary">
-            Next
-          </button>
-          </th>
-        </tr>
         </tbody>
       </table>
+      <div class="pagination pull-right" style="margin-right: 20px;">
+        <button [disabled]="unpaidPrPage?.first" (click)="loadUnpaidPreviousPage()" class="btn btn-primary">
+          Previous
+        </button>
+        &nbsp;&nbsp;<button [disabled]="unpaidPrPage?.last" (click)="loadUnpaidNextPage()" class="btn btn-primary">
+        Next
+      </button>
+      </div>
     </div>
   </div><!--.box-typical-body-->
 </section><!--.box-typical-->
@@ -90,7 +81,7 @@
   <header class="box-typical-header">
     <div class="tbl-row">
       <div class="tbl-cell tbl-cell-title">
-        <h3><a href="/events">Resolved Requests</a><br/>
+        <h3><a [routerLink]="['/rshare/payments/requests']">Resolved Requests</a><br/>
           ( Total: <span>{{paidPrPage?.totalElements}} users</span> ,
           Showing {{paidPrPage?.size}} users/page,
           Page: <span>{{pPage+1}}</span> )
@@ -120,7 +111,7 @@
             </div>
           </td>
           <td>{{pr.user?.name}}</td>
-          <td>{{pr.user.email}}</td>
+          <td>{{pr.user.actualEmail}}</td>
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Payment Method</div>
             {{pr.paymentMethod}}
@@ -141,25 +132,16 @@
             <button [routerLink]="['/users/earnings',pr.user.id]" class="btn btn-primary">Earnings</button>
           </td>
         </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-            <button [disabled]="paidPrPage?.first" (click)="loadPaidPreviousPage()" class="btn btn-primary">
-              Previous
-            </button>
-            &nbsp;&nbsp;<button [disabled]="paidPrPage?.last" (click)="loadPaidNextPage()" class="btn btn-primary">
-            Next
-          </button>
-          </th>
-        </tr>
         </tbody>
       </table>
+      <div class="pull-right pagination" style="margin-right: 20px;">
+        <button [disabled]="paidPrPage?.first" (click)="loadPaidPreviousPage()" class="btn btn-primary">
+          Previous
+        </button>
+        &nbsp;&nbsp;<button [disabled]="paidPrPage?.last" (click)="loadPaidNextPage()" class="btn btn-primary">
+        Next
+      </button>
+      </div>
     </div>
   </div><!--.box-typical-body-->
 </section><!--.box-typical-->

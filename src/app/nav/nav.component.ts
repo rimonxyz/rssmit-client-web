@@ -18,4 +18,7 @@ export class NavComponent implements OnInit {
     return this.auth.isLoggedIn();
   }
 
+  isLoggedInUserAdmin() {
+    return Auth.isAmin();
+  }
 }

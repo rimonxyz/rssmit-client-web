@@ -5,30 +5,42 @@
               <div class="sign-avatar">
                   <!-- <img src="../assets/img/avatar-sign.png" alt=""> -->
               </div>
-              <header class="sign-title">Sign Up<br/></header>
+              <h2 class="sign-title text text-primary">Sign Up<br/></h2>
               <div class="form-group">
-                  <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Name"/>
+                <input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Name" required/>
+                <em *ngIf="signUpForm.controls.name?.touched && signUpForm.controls.name?.value.length<3">Name can not be empty or less than 3 characters!</em>
               </div>
               <div class="form-group">
-                  <input type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Username"/>
+                <input type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Username"
+                       required/>
+                <em *ngIf="signUpForm.controls.username?.touched && signUpForm.controls.username?.value.length<3">Username
+                  must be at least 3 characters!</em>
               </div>
               <div class="form-group">
-                  <input type="email" [(ngModel)]="email" name="email" class="form-control" placeholder="E-Mail"/>
+                <input type="email" [(ngModel)]="email" name="email" class="form-control" placeholder="E-Mail" required
+                       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+                <em *ngIf="signUpForm.controls.email?.touched && signUpForm.controls.email?.invalid">Email is
+                  invalid!</em>
               </div>
               <div class="form-group">
-                  <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Password"/>
+                <input type="password" [(ngModel)]="password" name="password" class="form-control"
+                       placeholder="Password" required/>
+                <em *ngIf="signUpForm.controls.password?.touched && signUpForm.controls.password?.value.length<6">Password
+                  must be at least 6 characters!</em>
               </div>
-              <div class="form-group">
-                  <div class="checkbox float-left">
-                      <input type="checkbox" id="signed-in"/>
-                      <label for="signed-in">Keep me signed in</label>
-                  </div>
-                  <div class="float-right reset">
-                      <a href="reset-password.html">Reset Password</a>
-                  </div>
-              </div><br/>
-              <button type="submit" class="btn btn-rounded pull-right">Sign Up</button>
+              <!--<div class="form-group">-->
+                  <!--<div class="checkbox float-left">-->
+                      <!--<input type="checkbox" id="signed-in"/>-->
+                      <!--<label for="signed-in">Keep me signed in</label>-->
+                  <!--</div>-->
+                  <!--<div class="float-left reset">-->
+                      <!--<a href="reset-password.html">Reset Password</a>-->
+                  <!--</div>-->
+              <!--</div><br/>-->
+            <button [disabled]="signUpForm.invalid || signUpForm.controls.name?.value.length<3 || signUpForm.controls.username?.value.length<3 || signUpForm.controls.password?.value.length<6"
+                    type="submit" class="btn btn-rounded pull-right">Sign Up</button>
               <p class="sign-note">New to our website? <a [routerLink]="['/login']">Sign In</a></p>
+              <small>By clicking "Sign up", you agree to our <a href="//www.sharemyrevenue.net/privacy-policy">terms of service and privacy policy</a>. We’ll occasionally send you account related emails.</small>
               <!--<button type="button" class="close">
                   <span aria-hidden="true">&times;</span>
               </button>-->

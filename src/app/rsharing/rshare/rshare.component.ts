@@ -21,6 +21,8 @@ export class RShareComponent implements OnInit {
   month: string;
   year: string;
 
+  invalidDate: boolean;
+
   constructor(private rsharingService: RsharingService,
               private toastr: ToastrService,
               private auth: Auth) {
@@ -44,7 +46,7 @@ export class RShareComponent implements OnInit {
       this.toastr.success('Success!', 'Successfully created a sharing entity!');
       this.fetchRSharedPage();
     }, err => {
-      this.toastr.warning("We\'re sorry..","We\'re working on it! Please try again in a little while. This time it won\'t happen I promise!");
+      this.toastr.warning("We\'re sorry..","Could not save your sharing, Have you already shared for that month?");
       this.auth.refreshToken();
     });
   }
@@ -52,7 +54,7 @@ export class RShareComponent implements OnInit {
   fetchRSharedPage() {
     this.rsharingService.getRSharedListPaginated(this.page).subscribe((rsp: RSharedPage) => {
       this.rSharedPage = rsp;
-      console.log(this.rSharedPage);
+      // console.log(this.rSharedPage);
     }, err => {
       this.auth.refreshToken();
     });
@@ -76,7 +78,9 @@ export class RShareComponent implements OnInit {
   }
 
   onMonthInputChange() {
-    this.year = DateUtil.getLastMonthYear(this.month) + "";
+    this.invalidDate = this.isInvalidDate();
+    console.log("IsInvalid:" +this.invalidDate);    
+    // this.year = DateUtil.getLastMonthYear(this.month) + "";
   }
 
   onYearInputChange(year: string) {
@@ -85,5 +89,9 @@ export class RShareComponent implements OnInit {
 
   isInvalidDate(): boolean {
     return DateUtil.isInValidDateForSharing(this.month, +this.year);
+  }
+
+  onPaymentInfoClick(rShareId: Number) {
+    alert("Please pay the charge using rocket at \n017102261633\n and send a text message containing \n'ShareId: " + rShareId + "' and 'TrnxId: Your trnx id'");
   }
 }

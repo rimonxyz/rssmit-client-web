@@ -3,10 +3,12 @@ import {UserAuth} from '../model/user_auth.model';
 export class LocalStorage{
 
   public static KEYS: any = {
-        clientId : "client_id",
-        clientSecret: "client_secret",
-        accessToken: "access_token",
-        refreshToken: "refresh_token"
+    clientId: "*&^%&%G765bibi^87i5",
+    clientSecret: "V%$#564Vu56%786v*7i6",
+    accessToken: "B57UB5&i6u765&5b&*6",
+    refreshToken: "INB*5B&U4^345%36^5u",
+    authorities: "BU&46^&v3$76u%^&*",
+    username: "B^4^3&463b8575it"
   }
 
   constructor() {
@@ -23,6 +25,8 @@ export class LocalStorage{
   static putAuth(userAuth: UserAuth) {
     localStorage.setItem(this.KEYS.accessToken, userAuth.access_token);
     localStorage.setItem(this.KEYS.refreshToken, userAuth.refresh_token);
+    localStorage.setItem(this.KEYS.authorities, JSON.stringify(userAuth.authorities));
+    localStorage.setItem(this.KEYS.username, userAuth.username);
   }
 
   static clear(): void {

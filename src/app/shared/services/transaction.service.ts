@@ -13,6 +13,21 @@ export class TransactionService {
   constructor(private auth: Auth, private http: Http) {
   }
 
+  getAllTransactionsForClient(page: number) {
+    return this.http.get(this.getAllTransactionsForClientUrl(page))
+      .map((r: Response) => {
+        let trnxP = r.json()
+        trnxP.content.forEach(t => {
+          t.created = new Date(t.created);
+          t.lastUpdated = new Date(t.lastUpdated);
+          t.fromDate = new Date(t.fromDate);
+          t.toDate = new Date(t.toDate);
+        });
+        return <TransactionPage>trnxP;
+      })
+      .catch(this.handleError);
+  }
+
   getTransactions(userId: number): Observable<TransactionPage> {
     return this.http.get(this.getTransactionsUrl(userId))
       .map((r: Response) => {
@@ -77,6 +92,10 @@ export class TransactionService {
   }
   getTransactionsUrl(userId: number): string {
     return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/transactions/" + userId + "?access_token=" + this.auth.getAccessToken();
+  }
+
+  getAllTransactionsForClientUrl(page: number): string {
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/transactions/byClient/" + this.auth.getClientId() + "?page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 
   handleError(err): Observable<Response> {

@@ -7,6 +7,7 @@ import {ToastrService} from './toastr.service';
 import {CanActivate, Router} from "@angular/router";
 import {ApiEndpoints} from "./api.endpoints";
 import {LocalStorage} from "../utils/storage.util";
+import {Authority} from "../model/authority.model";
 
 
 @Injectable()
@@ -61,8 +62,21 @@ export class Auth implements CanActivate{
     userAuth.subscribe((userAuth: UserAuth)=>{
       LocalStorage.putAuth(userAuth);
       this.router.navigate(['/'])
-      this.toastr.success("Refresh Token","Token has been refreshed!");
+      // this.toastr.success("Refresh Token","Token has been refreshed!");
     },err=>this.logout());
+  }
+
+  public static isAmin(): boolean {
+    let a: string = LocalStorage.retrive(LocalStorage.KEYS.authorities);
+    let authorities: Authority[] = JSON.parse(a);
+    if (authorities == null) return false;
+    return authorities
+      .filter((a: Authority) => a.authority === 'ROLE_ADMIN')
+      .length > 0;
+  }
+
+  getUsername():string{
+    return <string>LocalStorage.retrive(LocalStorage.KEYS.username);
   }
 
   getAccessToken(): string{
