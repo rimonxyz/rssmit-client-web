@@ -66,7 +66,7 @@ export class Auth implements CanActivate{
     },err=>this.logout());
   }
 
-  public static isAmin(): boolean {
+  public static isAdmin(): boolean {
     let a: string = LocalStorage.retrive(LocalStorage.KEYS.authorities);
     let authorities: Authority[] = JSON.parse(a);
     if (authorities == null) return false;

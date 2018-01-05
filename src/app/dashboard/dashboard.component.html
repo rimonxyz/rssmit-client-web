@@ -1,4 +1,11 @@
-
+<div class="row" *ngIf="stats.numberOfEvents==0">
+  <div class="col-sm-12 alert alert-danger alert-no-border alert-txt-colored alert-close alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>First integrate our SDK!</strong> You can find the detail documentation about how you can integrate our SDK <strong><a href="https://docs.sharemyrevenue.net">here</a></strong>.
+  </div>
+</div>
 <div class="row">
   <div class="col-xl-6">
     <section class="widget widget-tabs-compact">

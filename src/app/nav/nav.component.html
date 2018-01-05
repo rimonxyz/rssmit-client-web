@@ -70,6 +70,13 @@
         </a>
       </li>
 
+      <li *ngIf="isLoggedInUserAdmin()">
+        <a [routerLink]="['/users/devs']">
+          <i class="font-icon font-icon-dashboard"></i>
+          <span class="lbl">Companies/Developers</span>
+        </a>
+      </li>
+
       <li>
         <a href="https://docs.sharemyrevenue.net">
           <i class="tag-color green"></i>

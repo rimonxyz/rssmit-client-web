@@ -15,6 +15,11 @@ export class UserService {
   constructor(private http: Http, private auth: Auth) {
   }
 
+  getDevelopers(page: number): Observable<UserPage> {
+    return this.http.get(this.getDevelopersUrl(page))
+      .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
+  }
+
   getUsers(page: number): Observable<UserPage> {
     return this.http.get(this.getUserPageUrl(page))
       .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
@@ -74,7 +79,14 @@ export class UserService {
   }
 
   private getUserPageUrl(page: number) {
-    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/users?page=" + page + "&access_token=" + this.auth.getAccessToken();
+    if (Auth.isAdmin())
+      return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/admin/users?page=" + page + "&access_token=" + this.auth.getAccessToken();
+    else
+      return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/users?page=" + page + "&access_token=" + this.auth.getAccessToken();
+  }
+
+  private getDevelopersUrl(page: number) {
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/admin/users/devs?page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 
   private getEligibleUsersForSharingUrl(rshareId: number, page: number) {
