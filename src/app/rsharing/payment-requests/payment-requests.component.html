@@ -3,8 +3,8 @@
     <div class="tbl-row">
       <div class="tbl-cell tbl-cell-title">
         <h3><a [routerLink]="['/rshare/payments/requests']">Payment Requests</a><br/>
-          ( Total: <span>{{unpaidPrPage?.totalElements}} users</span> ,
-          Showing {{unpaidPrPage?.size}} users/page,
+          ( Total: <span>{{unpaidPrPage?.totalElements}} unpaid requests</span> ,
+          Showing {{unpaidPrPage?.size}} requests/page,
           Page: <span>{{upPage+1}}</span> )
         </h3>
       </div>
@@ -83,7 +83,7 @@
       <div class="tbl-cell tbl-cell-title">
         <h3><a [routerLink]="['/rshare/payments/requests']">Resolved Requests</a><br/>
           ( Total: <span>{{paidPrPage?.totalElements}} users</span> ,
-          Showing {{paidPrPage?.size}} users/page,
+          Showing {{paidPrPage?.size}} requests/page,
           Page: <span>{{pPage+1}}</span> )
         </h3>
       </div>

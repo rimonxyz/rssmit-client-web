@@ -1,0 +1,65 @@
+<section class="box-typical">
+  <header class="box-typical-header">
+    <div class="tbl-row">
+      <div class="tbl-cell tbl-cell-title">
+        <h3><a href="/events"> All Applications</a><br/>
+          ( Total: <span>{{appsPage?.totalElements}} apps</span> ,
+          Showing {{appsPage?.size}} users/page,
+          Page: <span>{{page+1}}</span> )
+        </h3>
+      </div>
+    </div>
+  </header>
+  <div class="box-typical-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let app of appsPage?.content">
+
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">ID</div>
+            {{app.id}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Name</div>
+            {{app.name}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Package</div>
+            {{app.packageName}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Name</div>
+            {{app.devName}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Email</div>
+            {{app.devEmail}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Created</div>
+            {{getReadableDate(app.created)}}
+          </td>
+          <td>
+            <a href="https://play.google.com/store/apps/details?id={{app.packageName}}">Google Play</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="pagination pull-right" style="margin-right: 20px;">
+        <button [disabled]="appsPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
+        &nbsp;&nbsp;<button [disabled]="appsPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next</button>
+      </div>
+    </div>
+  </div><!--.box-typical-body-->
+</section><!--.box-typical-->

@@ -51,10 +51,16 @@
         <span class="lbl">Payment Requests</span>
       </a>
     </li>
-    <li class="green">
+    <li class="green" *ngIf="!isLoggedInUserAdmin()">
       <a [routerLink]="['/users']">
         <i class="font-icon font-icon-dashboard"></i>
         <span class="lbl">My Users</span>
+      </a>
+    </li>
+    <li class="green" *ngIf="!isLoggedInUserAdmin()">
+      <a [routerLink]="['/apps']">
+        <i class="font-icon font-icon-dashboard"></i>
+        <span class="lbl">My Applications</span>
       </a>
     </li>
   </ul>
@@ -63,17 +69,30 @@
     <header class="side-menu-title">--------</header>
     <ul class="side-menu-list">
 
-      <li *ngIf="isLoggedInUserAdmin()">
-        <a [routerLink]="['/rshare/requests']">
+      <li class="green">
+        <a [routerLink]="['/users']" *ngIf="isLoggedInUserAdmin()">
           <i class="font-icon font-icon-dashboard"></i>
-          <span class="lbl">Sharing Requests</span>
+          <span class="lbl">All Users</span>
+        </a>
+      </li>
+      <li class="purple with-sub" *ngIf="isLoggedInUserAdmin()">
+        <a [routerLink]="['/apps']">
+          <i class="font-icon font-icon-dashboard"></i>
+          <span class="lbl">All Applications</span>
+        </a>
+      </li>
+
+      <li class="red" *ngIf="isLoggedInUserAdmin()">
+        <a [routerLink]="['/users/devs']">
+          <i class="font-icon font-icon-dashboard"></i>
+          <span class="lbl">Companies/Devs</span>
         </a>
       </li>
 
       <li *ngIf="isLoggedInUserAdmin()">
-        <a [routerLink]="['/users/devs']">
+        <a [routerLink]="['/rshare/requests']">
           <i class="font-icon font-icon-dashboard"></i>
-          <span class="lbl">Companies/Developers</span>
+          <span class="lbl">Sharing Requests</span>
         </a>
       </li>
 

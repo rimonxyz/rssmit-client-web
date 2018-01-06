@@ -6,6 +6,7 @@ import {LogoutComponent} from "./logout/logout.component";
 import {Auth} from "./shared/services/auth.service";
 import {EventsComponent} from "./events/events.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {AppsComponent} from "./apps/apps.component";
 
 export const appRoutes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate: [Auth]},
@@ -15,6 +16,7 @@ export const appRoutes: Routes = [
   {path: 'signup', component: SignUpComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
+  {path: 'apps', component: AppsComponent},
   {path: 'rshare', loadChildren: 'app/rsharing/rsharing.module#RSharingModule', canActivate: [Auth]},
   {path: 'users', loadChildren: 'app/users/users.module#UsersModule', canActivate: [Auth]}
 ]
