@@ -29,6 +29,8 @@ import {StatisticsService} from "./shared/services/stats.service";
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { AppsComponent } from './apps/apps.component';
 import {AppsService} from "./shared/services/apps.service";
+import { PromoComponent } from './promo/promo.component';
+import {PromosService} from "./shared/services/promos.service";
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import {AppsService} from "./shared/services/apps.service";
     LogoutComponent,
     EventsComponent,
     PrivacyPolicyComponent,
-    AppsComponent
+    AppsComponent,
+    PromoComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import {AppsService} from "./shared/services/apps.service";
     RsharingService,
     TransactionService,
     StatisticsService,
-    AppsService
+    AppsService,
+    PromosService
   ],
   bootstrap: [AppComponent]
 })
