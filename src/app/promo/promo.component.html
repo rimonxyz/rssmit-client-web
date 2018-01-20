@@ -1,0 +1,116 @@
+<div class="box-typical box-typical-padding" *ngIf="isLoggedInUserAdmin()">
+  <h5 class="m-t-lg with-border">Create Promotion</h5>
+
+  <form #promoForm="ngForm" (ngSubmit)="createPromotion(promoForm.value)">
+    <div class="form-group row">
+      <label class="col-sm-2 form-control-label">Title</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><input [(ngModel)]="title" name="title" type="text" required class="form-control" id="title"
+                                              placeholder="Promo Title"></p>
+        <em *ngIf="promoForm.controls.title?.invalid && promoForm.controls.title?.touched">* Required!<br/></em>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 form-control-label">Url</label>
+      <div class="col-sm-10">
+        <p class="form-control-static"><input [(ngModel)]="promoUrl" name="promoUrl" required type="text" class="form-control" id="url"
+                                              placeholder="Promo Url"></p>
+        <em *ngIf="promoForm.controls.promoUrl?.invalid && promoForm.controls.promoUrl?.touched">* Required!<br/></em>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="description" class="col-sm-2 form-control-label">Description</label>
+      <div class="col-sm-10">
+        <textarea [(ngModel)]="description" name="description" rows="4" class="form-control" id="description"
+                  placeholder="Description"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit"
+          [disabled]="promoForm.invalid"
+          class="btn bt-primary pull-right">Create Promo</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
+
+<section class="box-typical">
+  <header class="box-typical-header">
+    <div class="tbl-row">
+      <div class="tbl-cell tbl-cell-title">
+        <h3><a href="/promos"> All Promotions</a><br/>
+          ( Total: <span>{{promosPage?.totalElements}} apps</span> ,
+          Showing {{promosPage?.size}} users/page,
+          Page: <span>{{page+1}}</span> )
+        </h3>
+      </div>
+    </div>
+  </header>
+  <div class="box-typical-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let promo of promosPage?.content">
+
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">ID</div>
+            {{promo.id}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Title</div>
+            {{promo.title}}
+          </td>
+          <!--<td>-->
+          <!--<div class="font-11 color-blue-grey-lighter uppercase">Description</div>-->
+          <!--{{promo.description}}-->
+          <!--</td>-->
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Promo Url</div>
+            {{promo.url}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Created</div>
+            {{getReadableDate(promo.created)}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Impressions</div>
+            {{promo.impressionCount}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Clicks</div>
+            {{promo.clickCount}}
+          </td>
+          <td *ngIf="!isLoggedInUserAdmin()">
+            <div class="font-11 color-blue-grey-lighter uppercase">Status</div>
+            <span *ngIf="promo.active" class="text text-success">Running</span>
+            <span *ngIf="!promo.active" class="text text-primary">Ended</span>
+          </td>
+          <td *ngIf="isLoggedInUserAdmin()">
+            <button (click)="toggleActive(promo)" class="btn btn-success" *ngIf="!promo.active">Activate</button>
+            <button (click)="toggleActive(promo)" class="btn btn-warning" *ngIf="promo.active">Deactivate</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="pagination pull-right" style="margin-right: 20px;">
+        <button [disabled]="promosPage?.first" (click)="loadPreviousPage()" class="btn btn-primary">Previous</button>
+        &nbsp;&nbsp;<button [disabled]="promosPage?.last" (click)="loadNextPage()" class="btn btn-primary">Next</button>
+      </div>
+    </div>
+  </div><!--.box-typical-body-->
+</section><!--.box-typical-->

@@ -27,6 +27,10 @@ import {RsharingService} from "./shared/services/rsharing.service";
 import {TransactionService} from "./shared/services/transaction.service";
 import {StatisticsService} from "./shared/services/stats.service";
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { AppsComponent } from './apps/apps.component';
+import {AppsService} from "./shared/services/apps.service";
+import { PromoComponent } from './promo/promo.component';
+import {PromosService} from "./shared/services/promos.service";
 
 @NgModule({
   declarations: [
@@ -39,7 +43,9 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     SignUpComponent,
     LogoutComponent,
     EventsComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    AppsComponent,
+    PromoComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +60,9 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     EventService,
     RsharingService,
     TransactionService,
-    StatisticsService
+    StatisticsService,
+    AppsService,
+    PromosService
   ],
   bootstrap: [AppComponent]
 })

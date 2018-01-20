@@ -68,26 +68,23 @@
             ৳{{rsp.companyCharge}}
           </td>
           <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Name</div>
+             {{rsp.devName}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Email</div>
+             {{rsp.devEmail}}
+          </td>
+          <td>
             <button (click)="activateSharedEntity(rsp.id)" class="btn btn-primary">Activate</button>
           </td>
         </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-            <button [disabled]="inActiveRSharedPage?.first" (click)="loadInActivePreviousPage()" class="btn btn-primary">Previous
-            </button>
-            &nbsp;&nbsp;<button [disabled]="inActiveRSharedPage?.last" (click)="loadInActiveNextPage()" class="btn btn-primary">Next
-          </button>
-          </th>
-        </tr>
         </tbody>
       </table>
+      <div class="pagination pull-right" style="margin-right: 20px;">
+        <button [disabled]="inActiveRSharedPage?.first" (click)="loadInActivePreviousPage()" class="btn btn-primary">Previous</button>
+        &nbsp;&nbsp;<button [disabled]="inActiveRSharedPage?.last" (click)="loadInActiveNextPage()" class="btn btn-primary">Next</button>
+      </div>
     </div>
   </div><!--.box-typical-body-->
 </section><!--.box-typical-->
@@ -147,26 +144,23 @@
             ৳{{rsp.companyCharge}}
           </td>
           <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Name</div>
+            {{rsp.devName}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Email</div>
+            {{rsp.devEmail}}
+          </td>
+          <td>
             <span class="text text-success">Activated</span>
           </td>
         </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th>
-            <button [disabled]="activeRSharedPage?.first" (click)="loadActivePreviousPage()" class="btn btn-primary">Previous
-            </button>
-            &nbsp;&nbsp;<button [disabled]="activeRSharedPage?.last" (click)="loadActiveNextPage()" class="btn btn-primary">Next
-          </button>
-          </th>
-        </tr>
         </tbody>
       </table>
+      <div class="pagination pull-right" style="margin-right: 20px;">
+        <button [disabled]="activeRSharedPage?.first" (click)="loadActivePreviousPage()" class="btn btn-primary">Previous</button>
+        &nbsp;&nbsp;<button [disabled]="activeRSharedPage?.last" (click)="loadActiveNextPage()" class="btn btn-primary">Next</button>
+      </div>
     </div>
   </div><!--.box-typical-body-->
 </section><!--.box-typical-->

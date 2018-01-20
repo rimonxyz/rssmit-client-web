@@ -9,4 +9,7 @@ export class RShared{
   toDate: string;
   month: string;
   year: number;
+  devId: number;
+  devName: string;
+  devEmail: string;
 }
