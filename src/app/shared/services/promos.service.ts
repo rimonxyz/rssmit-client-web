@@ -36,6 +36,8 @@ export class PromosService {
   }
 
   getAllPromosUrl(page: number): string {
+    if (!Auth.isAdmin())
+      return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/promos/self?page=" + page + "&access_token=" + this.auth.getAccessToken();
     return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/admin/promos?page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 

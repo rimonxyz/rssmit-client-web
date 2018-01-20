@@ -63,6 +63,12 @@
         <span class="lbl">My Applications</span>
       </a>
     </li>
+    <li class="green" *ngIf="!isLoggedInUserAdmin()">
+      <a [routerLink]="['/promos']">
+        <i class="font-icon font-icon-dashboard"></i>
+        <span class="lbl">My Promotions</span>
+      </a>
+    </li>
   </ul>
 
   <section>

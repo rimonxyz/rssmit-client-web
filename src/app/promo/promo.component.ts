@@ -63,4 +63,8 @@ export class PromoComponent implements OnInit {
       this.loadPromos(this.page);
     },err=>console.log(err));
   }
+
+  isLoggedInUserAdmin() {
+    return Auth.isAdmin();
+  }
 }

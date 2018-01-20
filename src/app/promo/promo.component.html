@@ -1,4 +1,4 @@
-<div class="box-typical box-typical-padding">
+<div class="box-typical box-typical-padding" *ngIf="isLoggedInUserAdmin()">
   <h5 class="m-t-lg with-border">Create Promotion</h5>
 
   <form #promoForm="ngForm" (ngSubmit)="createPromotion(promoForm.value)">
@@ -75,10 +75,10 @@
             <div class="font-11 color-blue-grey-lighter uppercase">Title</div>
             {{promo.title}}
           </td>
-          <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Description</div>
-            {{promo.description}}
-          </td>
+          <!--<td>-->
+          <!--<div class="font-11 color-blue-grey-lighter uppercase">Description</div>-->
+          <!--{{promo.description}}-->
+          <!--</td>-->
           <td>
             <div class="font-11 color-blue-grey-lighter uppercase">Promo Url</div>
             {{promo.url}}
@@ -88,6 +88,19 @@
             {{getReadableDate(promo.created)}}
           </td>
           <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Impressions</div>
+            {{promo.impressionCount}}
+          </td>
+          <td>
+            <div class="font-11 color-blue-grey-lighter uppercase">Clicks</div>
+            {{promo.clickCount}}
+          </td>
+          <td *ngIf="!isLoggedInUserAdmin()">
+            <div class="font-11 color-blue-grey-lighter uppercase">Status</div>
+            <span *ngIf="promo.active" class="text text-success">Running</span>
+            <span *ngIf="!promo.active" class="text text-primary">Ended</span>
+          </td>
+          <td *ngIf="isLoggedInUserAdmin()">
             <button (click)="toggleActive(promo)" class="btn btn-success" *ngIf="!promo.active">Activate</button>
             <button (click)="toggleActive(promo)" class="btn btn-warning" *ngIf="promo.active">Deactivate</button>
           </td>
