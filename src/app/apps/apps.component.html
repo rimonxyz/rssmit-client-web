@@ -26,33 +26,81 @@
         </tr>
         <tr *ngFor="let app of appsPage?.content">
 
-          <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">ID</div>
-            {{app.id}}
-          </td>
-          <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Name</div>
-            {{app.name}}
-          </td>
-          <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Package</div>
-            {{app.packageName}}
-          </td>
-          <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Name</div>
-            {{app.devName}}
-          </td>
-          <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Email</div>
-            {{app.devEmail}}
-          </td>
-          <td>
-            <div class="font-11 color-blue-grey-lighter uppercase">Created</div>
-            {{getReadableDate(app.created)}}
-          </td>
-          <td>
-            <a href="https://play.google.com/store/apps/details?id={{app.packageName}}">Google Play</a>
-          </td>
+            <td>
+              <div class="font-11 color-blue-grey-lighter uppercase">ID</div>
+              <span *ngIf="!isInEditMode(app.id)">{{app.id}}</span>
+              <input hidden [value]="app.id" #appId type="text" name="id" class="form-control">
+            </td>
+            <td>
+              <div class="font-11 color-blue-grey-lighter uppercase">Name</div>
+              <span *ngIf="!isInEditMode(app.id)">{{app.name}}</span>
+              <input *ngIf="isInEditMode(app.id)" [value]="app.name" type="text" #appName name="name" class="form-control">
+            </td>
+            <td>
+              <div class="font-11 color-blue-grey-lighter uppercase">Package</div>
+              <span *ngIf="!isInEditMode(app.id)">{{app.packageName}}</span>
+              <input *ngIf="isInEditMode(app.id)" [value]="app.packageName" #packageName type="text" name="packageName" class="form-control">
+            </td>
+            <td>
+              <div class="font-11 color-blue-grey-lighter uppercase">Category</div>
+              <span *ngIf="!isInEditMode(app.id)">{{app.categoryName}}</span>
+              <select name="categoryName" class="form-control" *ngIf="isInEditMode(app.id)" #categoryName>
+                <option [selected]="app.categoryName==null">Select Category</option>
+                <option [selected]="app.categoryName=='Art and Design'">Art and Design</option>
+                <option [selected]="app.categoryName=='Auto and Vehicles'">Auto and Vehicles</option>
+                <option [selected]="app.categoryName=='Beauty'">Beauty</option>
+                <option [selected]="app.categoryName=='Books and Reference'">Books and Reference</option>
+                <option [selected]="app.categoryName=='Business'">Business</option>
+                <option [selected]="app.categoryName=='Comics'">Comics</option>
+                <option [selected]="app.categoryName=='Communication'">Communication</option>
+                <option [selected]="app.categoryName=='Dating'">Dating</option>
+                <option [selected]="app.categoryName=='Education'">Education</option>
+                <option [selected]="app.categoryName=='Entertainments'">Entertainments</option>
+                <option [selected]="app.categoryName=='Finance'">Finance</option>
+                <option [selected]="app.categoryName=='Food and Drink'">Food and Drink</option>
+                <option [selected]="app.categoryName=='Health and Fitness'">Health and Fitness</option>
+                <option [selected]="app.categoryName=='House and Home'">House and Home</option>
+                <option [selected]="app.categoryName=='Libraries and Demo'">Libraries and Demo</option>
+                <option [selected]="app.categoryName=='Lifestyle'">Lifestyle</option>
+                <option [selected]="app.categoryName=='Maps and Navigation'">Maps and Navigation</option>
+                <option [selected]="app.categoryName=='Medical'">Medical</option>
+                <option [selected]="app.categoryName=='Music and Audio'">Music and Audio</option>
+                <option [selected]="app.categoryName=='News and Magazines'">News and Magazines</option>
+                <option [selected]="app.categoryName=='Personalization'">Personalization</option>
+                <option [selected]="app.categoryName=='Photography'">Photography</option>
+                <option [selected]="app.categoryName=='Productivity'">Productivity</option>
+                <option [selected]="app.categoryName=='Shopping'">Shopping</option>
+                <option [selected]="app.categoryName=='Social'">Social</option>
+                <option [selected]="app.categoryName=='Sports'">Sports</option>
+                <option [selected]="app.categoryName=='Tools'">Tools</option>
+                <option [selected]="app.categoryName=='Travel and Local'">Travel and Local</option>
+                <option [selected]="app.categoryName=='Video players and Editors'">Video players and Editors</option>
+                <option [selected]="app.categoryName=='Weather'">Weather</option>
+              </select>
+              <!--<input *ngIf="editMode" [value]="app.categoryName" type="text" name="categoryName" class="form-control">-->
+            </td>
+            <td>
+              <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Name</div>
+              {{app.devName}}
+            </td>
+            <td>
+              <div class="font-11 color-blue-grey-lighter uppercase">Dev/Company Email</div>
+              {{app.devEmail}}
+            </td>
+            <td>
+              <div class="font-11 color-blue-grey-lighter uppercase">Created</div>
+              {{getReadableDate(app.created)}}
+            </td>
+            <td>
+              <a href="https://play.google.com/store/apps/details?id={{app.packageName}}">Google Play</a>
+            </td>
+            <td>
+              <button *ngIf="!isInEditMode(app.id)" class="btn btn-default" (click)="toggleEditMode(app.id)">Edit</button>
+
+              <button *ngIf="isInEditMode(app.id)" class="btn btn-success" (click)="updateAppInfo()">Update</button>
+              <button *ngIf="isInEditMode(app.id)" class="btn btn-warning" (click)="toggleEditMode()">Cancel</button>
+            </td>
+
         </tr>
         </tbody>
       </table>

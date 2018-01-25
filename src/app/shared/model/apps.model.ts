@@ -4,6 +4,7 @@ export class Apps {
   lastUpdated: Date;
   name: string;
   packageName: string;
+  categoryName: string;
   devId: number;
   devName: string;
   devEmail: string;

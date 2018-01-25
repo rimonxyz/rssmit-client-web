@@ -25,13 +25,23 @@ export class AppsService {
         }).catch(this.handleError);
   }
 
+  updateApp(app: Apps): Observable<Response>{
+    let url : string = this.getUpdateAppUrl(app);
+    return this.http.patch(url,null);
+  }
+
   getMyAppsUrl(page: number): string {
     if (Auth.isAdmin())
       return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/admin/apps?page=" + page + "&access_token=" + this.auth.getAccessToken();
     return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/apps?page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 
+  getUpdateAppUrl(app: Apps): string {
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/apps/" + app.id + "?name=" + app.name + "&packageName=" + app.packageName + "&categoryName=" + app.categoryName + "&access_token=" + this.auth.getAccessToken();
+  }
+
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
   }
+
 }
