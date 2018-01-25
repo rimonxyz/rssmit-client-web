@@ -45,7 +45,7 @@
       <option value="all_time">All Time</option>
     </select><hr/>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-6" [routerLink]="['/events']">
         <article class="statistic-box red">
           <div>
             <div class="number">{{stats.numberOfEvents}}</div>
@@ -73,7 +73,7 @@
           </div>
         </article>
       </div><!--.col-->
-      <div class="col-sm-6">
+      <div class="col-sm-6" [routerLink]="['/users']">
         <article class="statistic-box yellow">
           <div>
             <div class="number">{{stats.totalUsers}}</div>

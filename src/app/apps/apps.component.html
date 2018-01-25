@@ -27,8 +27,8 @@
         <tr *ngFor="let app of appsPage?.content">
 
             <td>
-              <div class="font-11 color-blue-grey-lighter uppercase">ID</div>
-              <span *ngIf="!isInEditMode(app.id)">{{app.id}}</span>
+              <!--<div class="font-11 color-blue-grey-lighter uppercase">ID</div>-->
+              <!--<span *ngIf="!isInEditMode(app.id)">{{app.id}}</span>-->
               <input hidden [value]="app.id" #appId type="text" name="id" class="form-control">
             </td>
             <td>
