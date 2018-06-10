@@ -25,6 +25,11 @@ export class UserService {
       .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
   }
 
+  searchUsers(query: string, page: number): Observable<UserPage> {
+    return this.http.get(this.searchUsersPageUrl(query, page))
+      .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
+  }
+
   getEligibleUsersForSharing(rshareId: number, page: number): Observable<UserPage> {
     return this.http.get(this.getEligibleUsersForSharingUrl(rshareId, page))
       .map((response: Response) => <UserPage>response.json()).catch(this.handleError);
@@ -83,6 +88,13 @@ export class UserService {
       return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/admin/users?page=" + page + "&access_token=" + this.auth.getAccessToken();
     else
       return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/users?page=" + page + "&access_token=" + this.auth.getAccessToken();
+  }
+
+  private searchUsersPageUrl(query: string, page: number) {
+    if (Auth.isAdmin())
+      return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/admin/users?query=" + query + "&page=" + page + "&access_token=" + this.auth.getAccessToken();
+    else
+      return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + "/users?query=" + query + "&page=" + page + "&access_token=" + this.auth.getAccessToken();
   }
 
   private getDevelopersUrl(page: number) {

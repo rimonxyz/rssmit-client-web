@@ -8,6 +8,7 @@
           Page: <span>{{page+1}}</span> )
         </h3>
       </div>
+      <input type="text" (keyup.enter)="onEnterPressed($event.target.value)"  class="form-control" placeholder="Search User" style="margin-top: 10px;">
     </div>
   </header>
   <div class="box-typical-body">

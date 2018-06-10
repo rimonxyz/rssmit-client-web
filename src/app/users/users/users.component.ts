@@ -47,4 +47,9 @@ export class UsersComponent implements OnInit {
   loadEarnings(userId: Number) {
     this.router.navigate([''])
   }
+
+  onEnterPressed(query: string) {
+    console.log("query: "+query);
+    this.userService.searchUsers(query, this.page).subscribe((userPage: UserPage) => this.userPage = userPage, err => this.auth.refreshToken());
+  }
 }
