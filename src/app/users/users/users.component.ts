@@ -14,6 +14,8 @@ export class UsersComponent implements OnInit {
   userPage: UserPage;
   page: number;
 
+  recipientId: number;
+
   constructor(private userService: UserService,
               private router: Router,
               private auth: Auth) {
@@ -51,5 +53,14 @@ export class UsersComponent implements OnInit {
   onEnterPressed(query: string) {
     console.log("query: "+query);
     this.userService.searchUsers(query, this.page).subscribe((userPage: UserPage) => this.userPage = userPage, err => this.auth.refreshToken());
+  }
+
+  setRecipient(id: number) {
+    this.recipientId = id;
+  }
+
+  sendNotification(value: any) {
+    console.log(this.recipientId+" : ");
+    console.log(value);
   }
 }
