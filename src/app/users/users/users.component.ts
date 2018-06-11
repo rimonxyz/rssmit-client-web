@@ -4,6 +4,8 @@ import {UserPage} from "../../shared/model/user_page.model";
 import {DateUtil} from "../../shared/utils/date.util";
 import {Router} from "@angular/router";
 import {Auth} from "../../shared/services/auth.service";
+import {NotificationService} from "../../shared/services/notification.service";
+import {ToastrService} from "../../shared/services/toastr.service";
 
 @Component({
   selector: 'app-users',
@@ -18,6 +20,8 @@ export class UsersComponent implements OnInit {
 
   constructor(private userService: UserService,
               private router: Router,
+              private notificationService: NotificationService,
+              private toastr: ToastrService,
               private auth: Auth) {
   }
 
@@ -51,7 +55,6 @@ export class UsersComponent implements OnInit {
   }
 
   onEnterPressed(query: string) {
-    console.log("query: "+query);
     this.userService.searchUsers(query, this.page).subscribe((userPage: UserPage) => this.userPage = userPage, err => this.auth.refreshToken());
   }
 
@@ -59,8 +62,9 @@ export class UsersComponent implements OnInit {
     this.recipientId = id;
   }
 
-  sendNotification(value: any) {
-    console.log(this.recipientId+" : ");
-    console.log(value);
+  sendNotification(notification: any) {
+    this.notificationService.postNotification(this.recipientId,notification).subscribe(response => {
+      console.log(response);
+    }, err => console.log(err));
   }
 }
