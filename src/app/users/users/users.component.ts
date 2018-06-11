@@ -17,6 +17,8 @@ export class UsersComponent implements OnInit {
   page: number;
 
   recipientId: number;
+  title: string;
+  message: string;
 
   constructor(private userService: UserService,
               private router: Router,

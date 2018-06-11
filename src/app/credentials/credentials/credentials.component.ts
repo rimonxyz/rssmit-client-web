@@ -12,6 +12,9 @@ import {ToastrService} from "../../shared/services/toastr.service";
 export class CredentialsComponent implements OnInit {
 
   credentials: Credentials;
+  clientId: string;
+  clientSecret: string;
+  firebaseServerKey: string;
 
   constructor(private credentialsService: CredentialsService, private auth: Auth, private toastr: ToastrService) {
     this.credentials = new Credentials;
