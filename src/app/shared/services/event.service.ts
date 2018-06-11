@@ -3,7 +3,6 @@ import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {EventPage} from "../model/event-page.model";
 import {Event} from "../model/event.model";
-import {Statistics} from "../model/stats.model";
 import {ApiEndpoints} from "./api.endpoints";
 import {Auth} from "./auth.service";
 
@@ -22,7 +21,7 @@ export class EventService {
             event.created = new Date(event.created);
             event.lastUpdated = new Date(event.lastUpdated);
             event.date = new Date(event.date);
-          })
+          });
           return eventPage;
         }).catch(this.handleError);
   }

@@ -26,11 +26,13 @@ import {EventService} from "./shared/services/event.service";
 import {RsharingService} from "./shared/services/rsharing.service";
 import {TransactionService} from "./shared/services/transaction.service";
 import {StatisticsService} from "./shared/services/stats.service";
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { AppsComponent } from './apps/apps.component';
+import {PrivacyPolicyComponent} from './privacy-policy/privacy-policy.component';
+import {AppsComponent} from './apps/apps.component';
 import {AppsService} from "./shared/services/apps.service";
-import { PromoComponent } from './promo/promo.component';
+import {PromoComponent} from './promo/promo.component';
 import {PromosService} from "./shared/services/promos.service";
+import {CredentialsComponent} from './credentials/credentials/credentials.component';
+import {CredentialsService} from "./shared/services/credentials.service";
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import {PromosService} from "./shared/services/promos.service";
     EventsComponent,
     PrivacyPolicyComponent,
     AppsComponent,
-    PromoComponent
+    PromoComponent,
+    CredentialsComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import {PromosService} from "./shared/services/promos.service";
     TransactionService,
     StatisticsService,
     AppsService,
-    PromosService
+    PromosService,
+    CredentialsService
   ],
   bootstrap: [AppComponent]
 })

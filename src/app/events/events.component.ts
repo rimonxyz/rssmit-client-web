@@ -38,7 +38,7 @@ export class EventsComponent implements OnInit {
   loadPage(page: number) {
     this.eventService.getEvents(page).subscribe(eventsPage => {
       console.log("Loaded page: " + this.page);
-      this.eventsPage = eventsPage
+      this.eventsPage = eventsPage;
       console.log(this.eventsPage);
     }, err => this.auth.refreshToken());
   }

@@ -8,6 +8,7 @@ import {EventsComponent} from "./events/events.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 import {AppsComponent} from "./apps/apps.component";
 import {PromoComponent} from "./promo/promo.component";
+import {CredentialsComponent} from "./credentials/credentials/credentials.component";
 
 export const appRoutes: Routes = [
   {path: "dashboard", component: DashboardComponent, canActivate: [Auth]},
@@ -19,6 +20,7 @@ export const appRoutes: Routes = [
   {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: 'apps', component: AppsComponent},
   {path: 'promos', component: PromoComponent},
+  {path: 'credentials', component: CredentialsComponent},
   {path: 'rshare', loadChildren: 'app/rsharing/rsharing.module#RSharingModule', canActivate: [Auth]},
   {path: 'users', loadChildren: 'app/users/users.module#UsersModule', canActivate: [Auth]}
 ]
