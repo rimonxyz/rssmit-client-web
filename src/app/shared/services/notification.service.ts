@@ -20,12 +20,21 @@ export class NotificationService {
   }
 
   postNotificationUrl(userId: number, notification: any): string {
-    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/firebase/notify/' + userId + '?access_token=' + this.auth.getAccessToken() + '&title=' + notification.title + '&message=' + notification.message;
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/firebase/notify/' + userId + '?access_token=' + this.auth.getAccessToken() + '&title=' + notification.title + '&message=' + notification.message + "&type=" + notification.notificationType;
   }
 
+  postNotificationToTopicUrl( notification: any): string {
+    return ApiEndpoints.BASE_URL + ApiEndpoints.API_VERSION + '/firebase/notify/topic/' + notification.topic + '?access_token=' + this.auth.getAccessToken() + '&title=' + notification.title + '&message=' + notification.message + "&type=" + notification.notificationType;
+  }
 
   private handleError(error: Response) {
     return Observable.throw(error.statusText);
   }
 
+  postNotificationToTopic(notification: any) {
+    let url: string = this.postNotificationToTopicUrl(notification);
+    return this.http.post(url, null)
+      .map((res: Response) => console.log(res.json()))
+      .catch(this.handleError);
+  }
 }

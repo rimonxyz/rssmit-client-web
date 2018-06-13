@@ -17,8 +17,10 @@ export class UsersComponent implements OnInit {
   page: number;
 
   recipientId: number;
+  topic: string;
   title: string;
   message: string;
+  notificationType: string;
 
   constructor(private userService: UserService,
               private router: Router,
@@ -65,8 +67,28 @@ export class UsersComponent implements OnInit {
   }
 
   sendNotification(notification: any) {
-    this.notificationService.postNotification(this.recipientId,notification).subscribe(response => {
-      console.log(response);
-    }, err => console.log(err));
+    if (!notification.title || !notification.message || !notification.notificationType) {
+      this.toastr.warning("All fields are required!", "Please fill up the form accordingly.");
+      return;
+    }
+    this.notificationService.postNotification(this.recipientId, notification).subscribe(response => {
+      this.refresh();
+    }, err => console.log("error: " + err));
+
   }
+  sendNotificationToTopic(notification: any) {
+    if (!notification.title || !notification.message || !notification.notificationType || !notification.topic) {
+      this.toastr.warning("All fields are required!", "Please fill up the form accordingly.");
+      return;
+    }
+    this.notificationService.postNotificationToTopic(notification).subscribe(response => {
+      this.refresh();
+    }, err => console.log("error: " + err));
+
+  }
+
+  refresh(): void {
+    window.location.reload();
+  }
+
 }
