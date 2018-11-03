@@ -9,4 +9,5 @@ export class Event{
   tag: string;
   weight: number;
   date: Date;
+  eventData: Map<String,String>;
 }

@@ -34,6 +34,7 @@ import {PromosService} from "./shared/services/promos.service";
 import {CredentialsComponent} from './credentials/credentials/credentials.component';
 import {CredentialsService} from "./shared/services/credentials.service";
 import {NotificationService} from "./shared/services/notification.service";
+import {AlertService} from "./shared/services/alert.service";
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {NotificationService} from "./shared/services/notification.service";
     AppsService,
     PromosService,
     CredentialsService,
-    NotificationService
+    NotificationService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })

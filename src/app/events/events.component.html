@@ -52,6 +52,13 @@
             <div class="font-11 color-blue-grey-lighter uppercase">Last Updated</div>
             {{getReadableDate(e.lastUpdated)}}
           </td>
+          <div class="card">
+            <div class="card-block">
+              <p class="card-text">
+                <button (click)="showData(e)" class="btn btn-primary swal-btn-basic">Event Data</button>
+              </p>
+            </div>
+          </div>
         </tr>
         </tbody>
       </table>

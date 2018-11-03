@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {EventService} from "../shared/services/event.service";
 import {EventPage} from "../shared/model/event-page.model";
 import {DateUtil} from "../shared/utils/date.util";
-import {ToastrService} from "../shared/services/toastr.service";
-import {Router} from "@angular/router";
 import {Auth} from "../shared/services/auth.service";
+import {Event} from "../shared/model/event.model";
+import {AlertService} from "../shared/services/alert.service";
 
 @Component({
   selector: 'app-events',
@@ -15,7 +15,7 @@ export class EventsComponent implements OnInit {
   eventsPage: EventPage;
   page: number;
 
-  constructor(private eventService: EventService, private auth: Auth) {
+  constructor(private eventService: EventService, private auth: Auth, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -49,6 +49,10 @@ export class EventsComponent implements OnInit {
 
   getReadableDate(date: Date): string {
     return DateUtil.formatReadableDateTime(date);
+  }
+
+  showData(event: Event) {
+    this.alertService.showAlert(event.tag, JSON.stringify(event.eventData, null, 2));
   }
 
 }
