@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../shared/services/user.service";
-import {UserPage} from "../../shared/model/user_page.model";
-import {DateUtil} from "../../shared/utils/date.util";
-import {Router} from "@angular/router";
-import {Auth} from "../../shared/services/auth.service";
-import {NotificationService} from "../../shared/services/notification.service";
-import {ToastrService} from "../../shared/services/toastr.service";
+import {UserService} from '../../shared/services/user.service';
+import {UserPage} from '../../shared/model/user_page.model';
+import {DateUtil} from '../../shared/utils/date.util';
+import {Router} from '@angular/router';
+import {Auth} from '../../shared/services/auth.service';
+import {NotificationService} from '../../shared/services/notification.service';
+import {ToastrService} from '../../shared/services/toastr.service';
 
 @Component({
   selector: 'app-users',
@@ -21,6 +21,7 @@ export class UsersComponent implements OnInit {
   title: string;
   message: string;
   notificationType: string;
+  code: string;
 
   constructor(private userService: UserService,
               private router: Router,
@@ -31,11 +32,12 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.page = 0;
+    this.code = '200';
     this.loadUsers(this.page);
   }
 
   loadUsers(page: number) {
-    this.userService.getUsers(page).subscribe((userPage: UserPage) => this.userPage = userPage,err=>this.auth.refreshToken());
+    this.userService.getUsers(page).subscribe((userPage: UserPage) => this.userPage = userPage, err => this.auth.refreshToken());
   }
 
   getReadableDate(date: string): string {
@@ -45,7 +47,7 @@ export class UsersComponent implements OnInit {
   loadPreviousPage() {
     if (this.page > 0)
       this.page--;
-    this.loadUsers(this.page)
+    this.loadUsers(this.page);
   }
 
   loadNextPage() {
@@ -55,7 +57,7 @@ export class UsersComponent implements OnInit {
   }
 
   loadEarnings(userId: Number) {
-    this.router.navigate([''])
+    this.router.navigate(['']);
   }
 
   onEnterPressed(query: string) {
@@ -68,22 +70,31 @@ export class UsersComponent implements OnInit {
 
   sendNotification(notification: any) {
     if (!notification.title || !notification.message || !notification.notificationType) {
-      this.toastr.warning("All fields are required!", "Please fill up the form accordingly.");
+      this.toastr.warning('All fields are required!', 'Please fill up the form accordingly.');
       return;
     }
     this.notificationService.postNotification(this.recipientId, notification).subscribe(response => {
+      this.toastr.success('Success!', 'Successfully sent push notification.');
       this.refresh();
-    }, err => console.log("error: " + err));
+    }, err => {
+      this.toastr.error('Error! ' , err);
+      console.log('error: ' + err);
+    });
 
   }
+
   sendNotificationToTopic(notification: any) {
     if (!notification.title || !notification.message || !notification.notificationType || !notification.topic) {
-      this.toastr.warning("All fields are required!", "Please fill up the form accordingly.");
+      this.toastr.warning('All fields are required!', 'Please fill up the form accordingly.');
       return;
     }
     this.notificationService.postNotificationToTopic(notification).subscribe(response => {
+      this.toastr.success('Success!', 'Successfully sent push notification.');
       this.refresh();
-    }, err => console.log("error: " + err));
+    }, err => {
+      this.toastr.error('Error! ' , err);
+      console.log('error: ' + err);
+    });
 
   }
 
